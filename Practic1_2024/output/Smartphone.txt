@@ -1,6 +1,0 @@
-Id;Name;Description;Price;Manufacturer;CategoryId;QuantityInStock;Image;DateAdded
-1;iPhone 15 Pro;Флагманский смартфон от Apple с 120 Гц;1099.99;Apple;1;50;iphone15pro.jpg;01.01.2024
-2;Samsung Galaxy S23;Лучший флагман от Samsung с камерами высокого разрешения;999.99;Samsung;1;30;galaxys23.jpg;02.01.2024
-3;Xiaomi Redmi Note 12;Доступный смартфон с хорошими характеристиками;249.99;Xiaomi;3;100;redminote12.jpg;03.01.2024
-4;Asus ROG Phone 6;Игровой смартфон с мощным процессором и экраном 165 Гц;899.99;Asus;4;20;rogphone6.jpg;04.01.2024
-5;Honor 50;Смартфон с хорошей камерой и мощным аккумулятором;499.99;Honor;2;80;honor50.jpg;05.01.2024
