@@ -2,13 +2,18 @@
 {
     public class Order
     {
-        public int OrderId { get; set; }
+        public int Id { get; set; }
         public int UserId { get; set; }
-        public DateTime OrderDate { get; set; }
+        public User? User { get; set; } // Связь с пользователем
+        public DateOnly OrderDate { get; set; }
+        public string Status { get; set; }
         public decimal TotalAmount { get; set; }
-        public string? OrderStatus { get; set; }
+        public string DeliveryAddress { get; set; }
 
-        public User? User { get; set; }
-        public ICollection<OrderItem>? OrderItems { get; set; }
+        // Связь с заказанными товарами
+        public ICollection<OrderItem> OrderItems { get; set; }
+
+        // Связь с оплатами
+        public ICollection<Payment> Payments { get; set; }
     }
 }

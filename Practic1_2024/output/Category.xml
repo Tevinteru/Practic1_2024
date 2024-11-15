@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Category>
+  <Row>
+    <Id>1</Id>
+    <Name>Флагманы</Name>
+    <Description>Смартфоны с передовыми технологиями и высокой производительностью</Description>
+  </Row>
+  <Row>
+    <Id>2</Id>
+    <Name>Средний класс</Name>
+    <Description>Смартфоны с хорошим балансом цена/качество</Description>
+  </Row>
+  <Row>
+    <Id>3</Id>
+    <Name>Бюджетные</Name>
+    <Description>Доступные смартфоны для базовых нужд</Description>
+  </Row>
+  <Row>
+    <Id>4</Id>
+    <Name>Игровые</Name>
+    <Description>Смартфоны, ориентированные на геймеров с высокими характеристиками</Description>
+  </Row>
+  <Row>
+    <Id>5</Id>
+    <Name>Смарт-часы</Name>
+    <Description>Умные устройства, которые можно носить на руке</Description>
+  </Row>
+</Category>

@@ -34,7 +34,7 @@ namespace Practic1_2024.Controllers
             }
 
             var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -46,7 +46,7 @@ namespace Practic1_2024.Controllers
         // GET: Categories/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new Category());
         }
 
         // POST: Categories/Create
@@ -54,24 +54,13 @@ namespace Practic1_2024.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,CategoryName")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Category category)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                // Выведите отладочные сообщения в случае неудачи валидации
-                foreach (var modelState in ViewData.ModelState.Values)
-                {
-                    foreach (var error in modelState.Errors)
-                    {
-                        Console.WriteLine(error.ErrorMessage);
-                    }
-                }
             }
             return View(category);
         }
@@ -97,9 +86,9 @@ namespace Practic1_2024.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,CategoryName")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Category category)
         {
-            if (id != category.CategoryId)
+            if (id != category.Id)
             {
                 return NotFound();
             }
@@ -113,7 +102,7 @@ namespace Practic1_2024.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.CategoryId))
+                    if (!CategoryExists(category.Id))
                     {
                         return NotFound();
                     }
@@ -136,7 +125,7 @@ namespace Practic1_2024.Controllers
             }
 
             var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -162,7 +151,7 @@ namespace Practic1_2024.Controllers
 
         private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryId == id);
+            return _context.Categories.Any(e => e.Id == id);
         }
     }
 }

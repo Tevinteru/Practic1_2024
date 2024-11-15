@@ -1,0 +1,40 @@
+- Id: 1
+  Name: Иван Иванов
+  Email: ivan.ivanov@example.com
+  Password: password1
+  Role: Customer
+  Phone: 7,926123457E+10
+  Address: Москва, ул. Ленина, 1
+  RegistrationDate: 01.01.2024
+- Id: 2
+  Name: Мария Петрова
+  Email: maria.petrova@example.com
+  Password: password2
+  Role: Customer
+  Phone: 7,926987654E+10
+  Address: Санкт-Петербург, ул. Пушкина, 2
+  RegistrationDate: 02.01.2024
+- Id: 3
+  Name: Алексей Смирнов
+  Email: alexey.smirnov@example.com
+  Password: password3
+  Role: Admin
+  Phone: 7,926123457E+10
+  Address: Казань, ул. Мира, 3
+  RegistrationDate: 03.01.2024
+- Id: 4
+  Name: Ольга Иванова
+  Email: olga.ivanova@example.com
+  Password: password4
+  Role: Customer
+  Phone: 7,926987654E+10
+  Address: Новосибирск, ул. Ленина, 4
+  RegistrationDate: 04.01.2024
+- Id: 5
+  Name: Дмитрий Орлов
+  Email: dmitriy.orlov@example.com
+  Password: password5
+  Role: Customer
+  Phone: 7,926123457E+10
+  Address: Екатеринбург, ул. Победы, 5
+  RegistrationDate: 05.01.2024

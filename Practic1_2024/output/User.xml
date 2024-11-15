@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<User>
+  <Row>
+    <Id>1</Id>
+    <Name>Иван Иванов</Name>
+    <Email>ivan.ivanov@example.com</Email>
+    <Password>password1</Password>
+    <Role>Customer</Role>
+    <Phone>7,926123457E+10</Phone>
+    <Address>Москва, ул. Ленина, 1</Address>
+    <RegistrationDate>01.01.2024</RegistrationDate>
+  </Row>
+  <Row>
+    <Id>2</Id>
+    <Name>Мария Петрова</Name>
+    <Email>maria.petrova@example.com</Email>
+    <Password>password2</Password>
+    <Role>Customer</Role>
+    <Phone>7,926987654E+10</Phone>
+    <Address>Санкт-Петербург, ул. Пушкина, 2</Address>
+    <RegistrationDate>02.01.2024</RegistrationDate>
+  </Row>
+  <Row>
+    <Id>3</Id>
+    <Name>Алексей Смирнов</Name>
+    <Email>alexey.smirnov@example.com</Email>
+    <Password>password3</Password>
+    <Role>Admin</Role>
+    <Phone>7,926123457E+10</Phone>
+    <Address>Казань, ул. Мира, 3</Address>
+    <RegistrationDate>03.01.2024</RegistrationDate>
+  </Row>
+  <Row>
+    <Id>4</Id>
+    <Name>Ольга Иванова</Name>
+    <Email>olga.ivanova@example.com</Email>
+    <Password>password4</Password>
+    <Role>Customer</Role>
+    <Phone>7,926987654E+10</Phone>
+    <Address>Новосибирск, ул. Ленина, 4</Address>
+    <RegistrationDate>04.01.2024</RegistrationDate>
+  </Row>
+  <Row>
+    <Id>5</Id>
+    <Name>Дмитрий Орлов</Name>
+    <Email>dmitriy.orlov@example.com</Email>
+    <Password>password5</Password>
+    <Role>Customer</Role>
+    <Phone>7,926123457E+10</Phone>
+    <Address>Екатеринбург, ул. Победы, 5</Address>
+    <RegistrationDate>05.01.2024</RegistrationDate>
+  </Row>
+</User>

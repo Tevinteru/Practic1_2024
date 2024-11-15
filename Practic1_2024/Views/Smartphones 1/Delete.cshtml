@@ -1,0 +1,11 @@
+﻿@model Practic1_2024.Models.Smartphone
+
+<h2>Удалить товар</h2>
+
+<p>Вы уверены, что хотите удалить товар <strong>@Model.Name</strong>?</p>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a href="@Url.Action("Index", "Smartphones")" class="btn btn-secondary">Отмена</a>
+</form>

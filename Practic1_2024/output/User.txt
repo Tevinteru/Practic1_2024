@@ -1,0 +1,6 @@
+Id;Name;Email;Password;Role;Phone;Address;RegistrationDate
+1;Иван Иванов;ivan.ivanov@example.com;password1;Customer;7,926123457E+10;Москва, ул. Ленина, 1;01.01.2024
+2;Мария Петрова;maria.petrova@example.com;password2;Customer;7,926987654E+10;Санкт-Петербург, ул. Пушкина, 2;02.01.2024
+3;Алексей Смирнов;alexey.smirnov@example.com;password3;Admin;7,926123457E+10;Казань, ул. Мира, 3;03.01.2024
+4;Ольга Иванова;olga.ivanova@example.com;password4;Customer;7,926987654E+10;Новосибирск, ул. Ленина, 4;04.01.2024
+5;Дмитрий Орлов;dmitriy.orlov@example.com;password5;Customer;7,926123457E+10;Екатеринбург, ул. Победы, 5;05.01.2024

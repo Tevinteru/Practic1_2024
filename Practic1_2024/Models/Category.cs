@@ -2,9 +2,11 @@
 {
     public class Category
     {
-        public int CategoryId { get; set; }
-        public string? CategoryName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
 
-        public ICollection<ProductCategory>? ProductCategories { get; set; }
+        // Связь с товарами
+        public ICollection<Smartphone> Smartphones { get; set; } = new List<Smartphone>(); // Инициализация пустой коллекцией
     }
 }

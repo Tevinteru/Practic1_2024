@@ -1,0 +1,45 @@
+- Id: 1
+  Name: iPhone 15 Pro
+  Description: Флагманский смартфон от Apple с 120 Гц
+  Price: 1099.99
+  Manufacturer: Apple
+  CategoryId: 1
+  QuantityInStock: 50
+  Image: iphone15pro.jpg
+  DateAdded: 01.01.2024
+- Id: 2
+  Name: Samsung Galaxy S23
+  Description: Лучший флагман от Samsung с камерами высокого разрешения
+  Price: 999.99
+  Manufacturer: Samsung
+  CategoryId: 1
+  QuantityInStock: 30
+  Image: galaxys23.jpg
+  DateAdded: 02.01.2024
+- Id: 3
+  Name: Xiaomi Redmi Note 12
+  Description: Доступный смартфон с хорошими характеристиками
+  Price: 249.99
+  Manufacturer: Xiaomi
+  CategoryId: 3
+  QuantityInStock: 100
+  Image: redminote12.jpg
+  DateAdded: 03.01.2024
+- Id: 4
+  Name: Asus ROG Phone 6
+  Description: Игровой смартфон с мощным процессором и экраном 165 Гц
+  Price: 899.99
+  Manufacturer: Asus
+  CategoryId: 4
+  QuantityInStock: 20
+  Image: rogphone6.jpg
+  DateAdded: 04.01.2024
+- Id: 5
+  Name: Honor 50
+  Description: Смартфон с хорошей камерой и мощным аккумулятором
+  Price: 499.99
+  Manufacturer: Honor
+  CategoryId: 2
+  QuantityInStock: 80
+  Image: honor50.jpg
+  DateAdded: 05.01.2024

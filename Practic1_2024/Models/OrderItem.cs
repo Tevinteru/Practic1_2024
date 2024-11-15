@@ -2,13 +2,12 @@
 {
     public class OrderItem
     {
-        public int OrderItemId { get; set; }
+        public int Id { get; set; }
         public int OrderId { get; set; }
-        public int ProductId { get; set; }
+        public Order? Order { get; set; } // Связь с заказом
+        public int SmartphoneId { get; set; }
+        public Smartphone? Smartphone { get; set; } // Связь с товаром
         public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }
-
-        public Order? Order { get; set; }
-        public Product? Product { get; set; }
+        public decimal PriceAtOrder { get; set; }
     }
 }

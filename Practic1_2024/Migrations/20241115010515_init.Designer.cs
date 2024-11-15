@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Practic1_2024.Data;
@@ -11,9 +12,11 @@ using Practic1_2024.Data;
 namespace Practic1_2024.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    partial class StoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241115010515_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace Practic1_2024.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Practic1_2024.Models.Category", b =>
+            modelBuilder.Entity("Practic1_2024.Data.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +46,7 @@ namespace Practic1_2024.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.Order", b =>
+            modelBuilder.Entity("Practic1_2024.Data.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -55,8 +58,8 @@ namespace Practic1_2024.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateOnly>("OrderDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -75,7 +78,7 @@ namespace Practic1_2024.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.OrderItem", b =>
+            modelBuilder.Entity("Practic1_2024.Data.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,7 +107,7 @@ namespace Practic1_2024.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.Payment", b =>
+            modelBuilder.Entity("Practic1_2024.Data.Payment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -118,8 +121,8 @@ namespace Practic1_2024.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("integer");
 
-                    b.Property<DateOnly>("PaymentDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("PaymentMethod")
                         .IsRequired()
@@ -136,7 +139,7 @@ namespace Practic1_2024.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.Smartphone", b =>
+            modelBuilder.Entity("Practic1_2024.Data.Smartphone", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -147,8 +150,8 @@ namespace Practic1_2024.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
-                    b.Property<DateOnly>("DateAdded")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -179,7 +182,7 @@ namespace Practic1_2024.Migrations
                     b.ToTable("Smartphones");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.User", b =>
+            modelBuilder.Entity("Practic1_2024.Data.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -207,8 +210,8 @@ namespace Practic1_2024.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateOnly>("RegistrationDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Role")
                         .IsRequired()
@@ -219,9 +222,9 @@ namespace Practic1_2024.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.Order", b =>
+            modelBuilder.Entity("Practic1_2024.Data.Order", b =>
                 {
-                    b.HasOne("Practic1_2024.Models.User", "User")
+                    b.HasOne("Practic1_2024.Data.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -230,15 +233,15 @@ namespace Practic1_2024.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.OrderItem", b =>
+            modelBuilder.Entity("Practic1_2024.Data.OrderItem", b =>
                 {
-                    b.HasOne("Practic1_2024.Models.Order", "Order")
+                    b.HasOne("Practic1_2024.Data.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Practic1_2024.Models.Smartphone", "Smartphone")
+                    b.HasOne("Practic1_2024.Data.Smartphone", "Smartphone")
                         .WithMany("OrderItems")
                         .HasForeignKey("SmartphoneId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -249,9 +252,9 @@ namespace Practic1_2024.Migrations
                     b.Navigation("Smartphone");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.Payment", b =>
+            modelBuilder.Entity("Practic1_2024.Data.Payment", b =>
                 {
-                    b.HasOne("Practic1_2024.Models.Order", "Order")
+                    b.HasOne("Practic1_2024.Data.Order", "Order")
                         .WithMany("Payments")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -260,9 +263,9 @@ namespace Practic1_2024.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.Smartphone", b =>
+            modelBuilder.Entity("Practic1_2024.Data.Smartphone", b =>
                 {
-                    b.HasOne("Practic1_2024.Models.Category", "Category")
+                    b.HasOne("Practic1_2024.Data.Category", "Category")
                         .WithMany("Smartphones")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -271,24 +274,24 @@ namespace Practic1_2024.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.Category", b =>
+            modelBuilder.Entity("Practic1_2024.Data.Category", b =>
                 {
                     b.Navigation("Smartphones");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.Order", b =>
+            modelBuilder.Entity("Practic1_2024.Data.Order", b =>
                 {
                     b.Navigation("OrderItems");
 
                     b.Navigation("Payments");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.Smartphone", b =>
+            modelBuilder.Entity("Practic1_2024.Data.Smartphone", b =>
                 {
                     b.Navigation("OrderItems");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.User", b =>
+            modelBuilder.Entity("Practic1_2024.Data.User", b =>
                 {
                     b.Navigation("Orders");
                 });
