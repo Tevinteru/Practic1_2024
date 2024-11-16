@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Upload Excel File";
+}
+
+<h2>Загрузить Excel файл</h2>
+
+<form asp-action="UploadFile" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="excelFile">Выберите Excel файл</label>
+        <input type="file" id="excelFile" name="excelFile" class="form-control" accept=".xlsx,.xls" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Загрузить</button>
+</form>
+
+@if (ViewData["DownloadLinks"] != null)
+{
+    <h3>Файлы для скачивания:</h3>
+    <ul>
+        @foreach (var link in (List<string>)ViewData["DownloadLinks"])
+        {
+            <li><a href="@link" download>Скачать @link</a></li>
+        }
+    </ul>
+}

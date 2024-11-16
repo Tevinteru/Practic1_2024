@@ -5,42 +5,56 @@ namespace Practic1_2024.Data
 {
     public class StoreDbContext(DbContextOptions<StoreDbContext> options) : DbContext(options)
     {
+        // Таблицы в базе данных
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Smartphone> Smartphones { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<SmartphoneCharacteristic> SmartphoneCharacteristics { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            // Настройки для связей между таблицами
+            modelBuilder.Entity<Smartphone>()
+                .HasOne(s => s.Brand)
+                .WithMany(b => b.Smartphones)
+                .HasForeignKey(s => s.BrandId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // Связь между Order и User (1 ко многим)
+            modelBuilder.Entity<Smartphone>()
+                .HasOne(s => s.Category)
+                .WithMany(c => c.Smartphones)
+                .HasForeignKey(s => s.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SmartphoneCharacteristic>()
+                .HasOne(sc => sc.Smartphone)
+                .WithMany(s => s.Characteristics)
+                .HasForeignKey(sc => sc.SmartphoneId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.User)
                 .WithMany(u => u.Orders)
-                .HasForeignKey(o => o.UserId);
+                .HasForeignKey(o => o.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // Связь между Order и Payment (1 ко многим)
-            modelBuilder.Entity<Payment>()
-                .HasOne(p => p.Order)
-                .WithMany(o => o.Payments)
-                .HasForeignKey(p => p.OrderId);
-
-            // Связь между Order и OrderItem (1 ко многим)
             modelBuilder.Entity<OrderItem>()
                 .HasOne(oi => oi.Order)
                 .WithMany(o => o.OrderItems)
-                .HasForeignKey(oi => oi.OrderId);
+                .HasForeignKey(oi => oi.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // Связь между OrderItem и Smartphone (многие ко многим)
             modelBuilder.Entity<OrderItem>()
                 .HasOne(oi => oi.Smartphone)
                 .WithMany(s => s.OrderItems)
-                .HasForeignKey(oi => oi.SmartphoneId);
+                .HasForeignKey(oi => oi.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
+
     
 
   

@@ -12,8 +12,8 @@ using Practic1_2024.Data;
 namespace Practic1_2024.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20241115024029_remove_datetime")]
-    partial class remove_datetime
+    [Migration("20241116032415_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace Practic1_2024.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Practic1_2024.Models.Category", b =>
+            modelBuilder.Entity("Practic1_2024.Models.Brand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,9 +33,22 @@ namespace Practic1_2024.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands");
+                });
+
+            modelBuilder.Entity("Practic1_2024.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -54,19 +67,18 @@ namespace Practic1_2024.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("DeliveryAddress")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateOnly>("OrderDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("TotalAmount")
+                    b.Property<decimal>("TotalPrice")
                         .HasColumnType("numeric");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
@@ -89,54 +101,22 @@ namespace Practic1_2024.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("integer");
 
-                    b.Property<decimal>("PriceAtOrder")
+                    b.Property<decimal>("Price")
                         .HasColumnType("numeric");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<int>("SmartphoneId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("SmartphoneId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
-                });
-
-            modelBuilder.Entity("Practic1_2024.Models.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("numeric");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateOnly>("PaymentDate")
-                        .HasColumnType("date");
-
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PaymentStatus")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Practic1_2024.Models.Smartphone", b =>
@@ -147,21 +127,25 @@ namespace Practic1_2024.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BrandId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
-                    b.Property<DateOnly>("DateAdded")
-                        .HasColumnType("date");
+                    b.Property<string>("ColorOptions")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Manufacturer")
+                    b.Property<string>("MemoryOptions")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -172,14 +156,45 @@ namespace Practic1_2024.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("QuantityInStock")
+                    b.Property<int>("ReleaseYear")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SimCount")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BrandId");
+
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Smartphones");
+                });
+
+            modelBuilder.Entity("Practic1_2024.Models.SmartphoneCharacteristic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Characteristic")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("SmartphoneId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SmartphoneId");
+
+                    b.ToTable("SmartphoneCharacteristics");
                 });
 
             modelBuilder.Entity("Practic1_2024.Models.User", b =>
@@ -209,9 +224,6 @@ namespace Practic1_2024.Migrations
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<DateOnly>("RegistrationDate")
-                        .HasColumnType("date");
 
                     b.Property<string>("Role")
                         .IsRequired()
@@ -243,7 +255,7 @@ namespace Practic1_2024.Migrations
 
                     b.HasOne("Practic1_2024.Models.Smartphone", "Smartphone")
                         .WithMany("OrderItems")
-                        .HasForeignKey("SmartphoneId")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -252,26 +264,39 @@ namespace Practic1_2024.Migrations
                     b.Navigation("Smartphone");
                 });
 
-            modelBuilder.Entity("Practic1_2024.Models.Payment", b =>
+            modelBuilder.Entity("Practic1_2024.Models.Smartphone", b =>
                 {
-                    b.HasOne("Practic1_2024.Models.Order", "Order")
-                        .WithMany("Payments")
-                        .HasForeignKey("OrderId")
+                    b.HasOne("Practic1_2024.Models.Brand", "Brand")
+                        .WithMany("Smartphones")
+                        .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("Practic1_2024.Models.Smartphone", b =>
-                {
                     b.HasOne("Practic1_2024.Models.Category", "Category")
                         .WithMany("Smartphones")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Brand");
+
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Practic1_2024.Models.SmartphoneCharacteristic", b =>
+                {
+                    b.HasOne("Practic1_2024.Models.Smartphone", "Smartphone")
+                        .WithMany("Characteristics")
+                        .HasForeignKey("SmartphoneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Smartphone");
+                });
+
+            modelBuilder.Entity("Practic1_2024.Models.Brand", b =>
+                {
+                    b.Navigation("Smartphones");
                 });
 
             modelBuilder.Entity("Practic1_2024.Models.Category", b =>
@@ -282,12 +307,12 @@ namespace Practic1_2024.Migrations
             modelBuilder.Entity("Practic1_2024.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
-
-                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("Practic1_2024.Models.Smartphone", b =>
                 {
+                    b.Navigation("Characteristics");
+
                     b.Navigation("OrderItems");
                 });
 

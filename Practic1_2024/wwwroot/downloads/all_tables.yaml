@@ -1,0 +1,197 @@
+Categories:
+- Name: Флагманы
+- Name: Бюджетные смартфоны
+- Name: Игровые смартфоны
+- Name: Смартфоны с хорошей камерой
+- Name: Смартфоны с большим аккумулятором
+Users:
+- Name: Иван Иванов
+  Email: ivan@example.com
+  Password: 12345
+  Role: Пользователь
+  Phone: 7,999123457E+10
+  Address: Москва, ул. Ленина
+  '': ''
+- Name: Ольга Петрова
+  Email: olga@example.com
+  Password: 54321
+  Role: Администратор
+  Phone: 7,999234568E+10
+  Address: СПб, ул. Пушкина
+  '': ''
+- Name: Дмитрий Смирнов
+  Email: dmitry@example.com
+  Password: 67890
+  Role: Пользователь
+  Phone: 7,999345679E+10
+  Address: Казань, ул. Суворова
+  '': ''
+- Name: Мария Васильева
+  Email: maria@example.com
+  Password: 11223
+  Role: Администратор
+  Phone: 7,999456789E+10
+  Address: Екатеринбург, ул. Чапаева
+  '': ''
+- Name: Сергей Новиков
+  Email: sergey@example.com
+  Password: 44556
+  Role: Пользователь
+  Phone: 7,99956789E+10
+  Address: Нижний Новгород, ул. Горького
+  '': ''
+Brands:
+- Name: Samsung
+  '': ''
+- Name: Apple
+  '': ''
+- Name: Xiaomi
+  '': ''
+- Name: Huawei
+  '': ''
+- Name: OnePlus
+  '': ''
+Smartphones:
+- Name: Galaxy S23
+  BrandId: 1
+  Description: Флагман от Samsung
+  Price: 89999
+  ReleaseYear: 2023
+  SimCount: 2
+  MemoryOptions: 128GB, 256GB
+  ColorOptions: Черный, Белый
+  CategoryId: 1
+  ImageUrl: /images/s23.jpg
+- Name: iPhone 14
+  BrandId: 2
+  Description: Новый iPhone
+  Price: 109999
+  ReleaseYear: 2022
+  SimCount: 1
+  MemoryOptions: 128GB, 256GB
+  ColorOptions: Черный, Золотой
+  CategoryId: 1
+  ImageUrl: /images/iphone14.jpg
+- Name: Xiaomi Mi 11
+  BrandId: 3
+  Description: Бюджетный Xiaomi
+  Price: 29999
+  ReleaseYear: 2021
+  SimCount: 2
+  MemoryOptions: 64GB, 128GB
+  ColorOptions: Синий, Черный
+  CategoryId: 1
+  ImageUrl: /images/mi11.jpg
+- Name: Huawei P40
+  BrandId: 4
+  Description: Смартфон Huawei
+  Price: 49999
+  ReleaseYear: 2020
+  SimCount: 2
+  MemoryOptions: 128GB, 256GB
+  ColorOptions: Зеленый, Черный
+  CategoryId: 1
+  ImageUrl: /images/p40.jpg
+- Name: OnePlus 9 Pro
+  BrandId: 5
+  Description: OnePlus флагман
+  Price: 74999
+  ReleaseYear: 2021
+  SimCount: 2
+  MemoryOptions: 128GB, 256GB
+  ColorOptions: Серебристый, Черный
+  CategoryId: 1
+  ImageUrl: /images/oneplus9.jpg
+'SmartphoneCharacteristics ':
+- SmartphoneId: 1
+  Characteristic: Диагональ экрана
+  Value: 6.1 дюйма
+- SmartphoneId: 1
+  Characteristic: Процессор
+  Value: Snapdragon 8
+- SmartphoneId: 1
+  Characteristic: Операционная система
+  Value: Android 13
+- SmartphoneId: 2
+  Characteristic: Диагональ экрана
+  Value: 6.1 дюйма
+- SmartphoneId: 2
+  Characteristic: Процессор
+  Value: A15 Bionic
+- SmartphoneId: 2
+  Characteristic: Операционная система
+  Value: iOS 16
+- SmartphoneId: 3
+  Characteristic: Диагональ экрана
+  Value: 6.81 дюйма
+- SmartphoneId: 3
+  Characteristic: Процессор
+  Value: Snapdragon 888
+- SmartphoneId: 3
+  Characteristic: Операционная система
+  Value: Android 11
+- SmartphoneId: 4
+  Characteristic: Диагональ экрана
+  Value: 6.1 дюйма
+- SmartphoneId: 4
+  Characteristic: Процессор
+  Value: Kirin 990
+- SmartphoneId: 4
+  Characteristic: Операционная система
+  Value: Android 10
+- SmartphoneId: 5
+  Characteristic: Диагональ экрана
+  Value: 6.7 дюйма
+- SmartphoneId: 5
+  Characteristic: Процессор
+  Value: Snapdragon 888
+- SmartphoneId: 5
+  Characteristic: Операционная система
+  Value: Android 11
+Orders:
+- UserId: 1
+  TotalPrice: 89999
+  Status: В обработке
+  CreatedAt: 01.01.2024
+  UpdatedAt: 02.01.2024
+- UserId: 2
+  TotalPrice: 109999
+  Status: Завершен
+  CreatedAt: 01.02.2024
+  UpdatedAt: 03.02.2024
+- UserId: 3
+  TotalPrice: 29999
+  Status: Отменен
+  CreatedAt: 01.03.2024
+  UpdatedAt: 02.03.2024
+- UserId: 4
+  TotalPrice: 49999
+  Status: В процессе
+  CreatedAt: 01.04.2024
+  UpdatedAt: 03.04.2024
+- UserId: 5
+  TotalPrice: 74999
+  Status: Завершен
+  CreatedAt: 01.05.2024
+  UpdatedAt: 02.05.2024
+OrderItems:
+- OrderId: 1
+  ProductId: 1
+  Quantity: 1
+  Price: 89999
+- OrderId: 2
+  ProductId: 2
+  Quantity: 1
+  Price: 109999
+- OrderId: 3
+  ProductId: 3
+  Quantity: 1
+  Price: 29999
+- OrderId: 4
+  ProductId: 4
+  Quantity: 1
+  Price: 49999
+- OrderId: 5
+  ProductId: 5
+  Quantity: 1
+  Price: 74999

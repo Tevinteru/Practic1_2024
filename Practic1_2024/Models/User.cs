@@ -2,16 +2,15 @@
 {
     public class User
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Role { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
-        public DateOnly RegistrationDate { get; set; }
+        public int Id { get; set; }  // Уникальный идентификатор пользователя
+        public string Name { get; set; }  // Имя пользователя
+        public string Email { get; set; }  // Электронная почта
+        public string Password { get; set; }  // Пароль
+        public string Role { get; set; }  // Роль пользователя (например, "admin", "customer")
+        public string Phone { get; set; }  // Телефон
+        public string Address { get; set; }  // Адрес
 
-        // Связь с заказами
-        public ICollection<Order> Orders { get; set; }
+        // Навигационное свойство: связь с заказами
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

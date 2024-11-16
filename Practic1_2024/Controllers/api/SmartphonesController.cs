@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Practic1_2024.Data;
 using Practic1_2024.Models;
 
-namespace Practic1_2024.Controllers.api
+namespace Practic1_2024.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
