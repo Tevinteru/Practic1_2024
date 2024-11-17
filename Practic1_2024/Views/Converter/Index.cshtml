@@ -1,24 +1,29 @@
 ﻿@{
-    ViewData["Title"] = "Upload Excel File";
+    ViewData["Title"] = "Конвертер данных";
 }
 
-<h2>Загрузить Excel файл</h2>
+<h2>@ViewData["Title"]</h2>
 
-<form asp-action="UploadFile" method="post" enctype="multipart/form-data">
+<p>Загрузите файл Excel для конвертации в различные форматы.</p>
+
+<form enctype="multipart/form-data" method="post" asp-action="Upload">
     <div class="form-group">
-        <label for="excelFile">Выберите Excel файл</label>
-        <input type="file" id="excelFile" name="excelFile" class="form-control" accept=".xlsx,.xls" required />
+        <label for="excelFile">Выберите файл Excel</label>
+        <input type="file" id="excelFile" name="excelFile" class="form-control" accept=".xlsx, .xls" />
     </div>
-    <button type="submit" class="btn btn-primary">Загрузить</button>
+    <button type="submit" class="btn btn-primary">Загрузить файл</button>
 </form>
 
 @if (ViewData["DownloadLinks"] != null)
 {
-    <h3>Файлы для скачивания:</h3>
+    <h3>Файлы для скачивания</h3>
     <ul>
-        @foreach (var link in (List<string>)ViewData["DownloadLinks"])
+        @foreach (var downloadLink in (List<string>)ViewData["DownloadLinks"])
         {
-            <li><a href="@link" download>Скачать @link</a></li>
+            <li>
+                <a href="@downloadLink" download>@downloadLink</a>
+            </li>
         }
     </ul>
 }
+

@@ -33,7 +33,7 @@ namespace Practic1_2024.Controllers
 
         // Действие для обработки загрузки Excel файла
         [HttpPost]
-        public IActionResult UploadFile(IFormFile excelFile)
+        public IActionResult Upload(IFormFile excelFile)
         {
             if (excelFile == null || excelFile.Length == 0)
             {
@@ -128,7 +128,6 @@ namespace Practic1_2024.Controllers
             return data;
         }
 
-        // Метод для экспорта данных во все форматы (для одного файла)
         private void ExportToTxt(Dictionary<string, List<Dictionary<string, string>>> allData, string filePath)
         {
             var sb = new StringBuilder();
@@ -136,28 +135,33 @@ namespace Practic1_2024.Controllers
             // Для каждой таблицы добавляем название таблицы и ее содержимое
             foreach (var table in allData)
             {
-                sb.AppendLine($"### {table.Key} ###");
+                sb.AppendLine($"{table.Key}");
 
                 // Записываем заголовки
                 if (table.Value.Count > 0)
                 {
                     var headers = table.Value.First().Keys.ToList();
-                    sb.AppendLine(string.Join("\t", headers));
+                    sb.AppendLine(string.Join(";", headers));
                 }
 
                 // Записываем строки
                 foreach (var row in table.Value)
                 {
-                    sb.AppendLine(string.Join("\t", row.Values));
+                    // Проверяем, что строка не пустая, чтобы избежать добавления пустых строк
+                    var rowData = string.Join(";", row.Values);
+                    if (!string.IsNullOrWhiteSpace(rowData))
+                    {
+                        sb.AppendLine(rowData);
+                    }
                 }
 
-                sb.AppendLine();
+                // Убираем добавление лишней пустой строки после каждой таблицы
+                sb.AppendLine(); // Оставляем эту строку, если нужно, но можно убрать, если она лишняя
             }
 
             // Сохраняем файл
-            System.IO.File.WriteAllText(filePath, sb.ToString());
+            System.IO.File.WriteAllText(filePath, sb.ToString().TrimEnd()); // .TrimEnd() удаляет последние пустые строки
         }
-
         private void ExportToCsv(Dictionary<string, List<Dictionary<string, string>>> allData, string filePath)
         {
             var sb = new StringBuilder();
@@ -165,26 +169,32 @@ namespace Practic1_2024.Controllers
             // Для каждой таблицы добавляем название таблицы и ее содержимое
             foreach (var table in allData)
             {
-                sb.AppendLine($"### {table.Key} ###");
+                sb.AppendLine($"{table.Key}");
 
                 // Записываем заголовки
                 if (table.Value.Count > 0)
                 {
                     var headers = table.Value.First().Keys.ToList();
-                    sb.AppendLine(string.Join(",", headers));
+                    sb.AppendLine(string.Join(";", headers));
                 }
 
                 // Записываем строки
                 foreach (var row in table.Value)
                 {
-                    sb.AppendLine(string.Join(",", row.Values));
+                    // Проверяем, что строка не пустая, чтобы избежать добавления пустых строк
+                    var rowData = string.Join(";", row.Values);
+                    if (!string.IsNullOrWhiteSpace(rowData))
+                    {
+                        sb.AppendLine(rowData);
+                    }
                 }
 
-                sb.AppendLine();
+                // Убираем добавление лишней пустой строки после каждой таблицы
+                sb.AppendLine(); // Оставляем эту строку, если нужно, но можно убрать, если она лишняя
             }
 
             // Сохраняем файл
-            System.IO.File.WriteAllText(filePath, sb.ToString());
+            System.IO.File.WriteAllText(filePath, sb.ToString().TrimEnd()); // .TrimEnd() удаляет последние пустые строки
         }
 
         private void ExportToXml(Dictionary<string, List<Dictionary<string, string>>> allData, string filePath)

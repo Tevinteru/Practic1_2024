@@ -50,20 +50,8 @@ namespace Practic1_2024.Data
             modelBuilder.Entity<OrderItem>()
                 .HasOne(oi => oi.Smartphone)
                 .WithMany(s => s.OrderItems)
-                .HasForeignKey(oi => oi.ProductId)
+                .HasForeignKey(oi => oi.SmartphoneId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
-
-    
-
-  
-
-   
-
-   
-
-    
-
-    
 }

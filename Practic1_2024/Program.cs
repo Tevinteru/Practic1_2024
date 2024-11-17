@@ -3,13 +3,15 @@ using Practic1_2024.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Получение строки подключения из конфигурации
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Добавление сервиса DbContext с использованием строки подключения
 builder.Services.AddDbContext<StoreDbContext>(options =>
-    options.UseNpgsql(connectionString));
-
+{
+    options.UseNpgsql(connectionString)
+           .EnableSensitiveDataLogging() // Логирование данных запроса
+           .LogTo(Console.WriteLine, LogLevel.Information); // Логирование всех SQL запросов в консоль
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Импорт данных";
+}
+
+<h2>Импорт данных из файла</h2>
+
+<!-- Сообщение о результате операции -->
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+<!-- Форма для загрузки файла -->
+<form asp-action="UploadFile" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file">Выберите файл для загрузки</label>
+        <input type="file" id="file" name="file" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Загрузить</button>
+    </div>
+</form>
+
+<hr />
+
+<h4>Поддерживаемые форматы файлов:</h4>
+<ul>
+    <li>TXT</li>
+    <li>CSV</li>
+    <li>XML</li>
+    <li>YAML</li>
+</ul>
+
