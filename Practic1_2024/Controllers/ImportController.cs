@@ -598,8 +598,5 @@ namespace Practic1_2024.Controllers
                 Console.WriteLine($"Ошибка при импорте позиции в заказе: {string.Join(";", columns)}. Ошибка: {ex.Message}");
             }
         }
-
-
-
     }
 }

@@ -5,124 +5,98 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Serialization;
-using YamlDotNet.Serialization;
-using System.Runtime.Serialization;
 using System.Xml.Linq;
-using static Practic1_2024.Data.XmlClass;
+using YamlDotNet.Serialization;
 
 namespace Practic1_2024.Controllers
 {
     public class ConverterController : Controller
     {
-        // Статический каталог для хранения экспортируемых файлов
+        // Папка для сохранения экспортированных файлов
         private readonly string _downloadFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "downloads");
 
         public ConverterController()
         {
             // Создаем каталог, если его нет
-            if (!Directory.Exists(_downloadFolder))
-            {
-                Directory.CreateDirectory(_downloadFolder);
-            }
+            Directory.CreateDirectory(_downloadFolder);
         }
 
-        // Действие для отображения формы загрузки
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
-        // Действие для обработки загрузки Excel файла
         [HttpPost]
         public IActionResult Upload(IFormFile excelFile)
         {
-            if (excelFile == null || excelFile.Length == 0)
+            if (excelFile?.Length > 0)
             {
-                ModelState.AddModelError("", "Пожалуйста, выберите файл для загрузки.");
+                var filePath = Path.Combine(_downloadFolder, excelFile.FileName);
+                SaveFile(excelFile, filePath);
+
+                var downloadLinks = ProcessFileAndExport(filePath);
+
+                ViewData["DownloadLinks"] = downloadLinks;
                 return View("Index");
             }
 
-            // Сохраняем загруженный файл на сервере
-            var filePath = Path.Combine(_downloadFolder, excelFile.FileName);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                excelFile.CopyTo(fileStream);
-            }
-
-            // Чтение данных из Excel файла и экспорт в другие форматы
-            var downloadLinks = ProcessFileAndExport(filePath, _downloadFolder);
-
-            // Передаем ссылки на скачивание в представление
-            ViewData["DownloadLinks"] = downloadLinks;
-
+            ModelState.AddModelError("", "Пожалуйста, выберите файл для загрузки.");
             return View("Index");
         }
 
-        // Метод для обработки Excel файла и экспорта данных в несколько форматов
-        public List<string> ProcessFileAndExport(string filePath, string downloadFolder)
+        // Сохраняем файл на сервере
+        private void SaveFile(IFormFile file, string path)
+        {
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(fileStream);
+            }
+        }
+
+        // Обрабатываем Excel файл и экспортируем в различные форматы
+        private List<string> ProcessFileAndExport(string filePath)
         {
             var downloadLinks = new List<string>();
 
+            var allData = ReadExcelData(filePath);
+
+            // Экспортируем в различные форматы
+            downloadLinks.Add(ExportToTxt(allData));
+            downloadLinks.Add(ExportToCsv(allData));
+            downloadLinks.Add(ExportToXml(allData));
+            downloadLinks.Add(ExportToYaml(allData));
+
+            return downloadLinks;
+        }
+
+        // Чтение данных из Excel
+        private Dictionary<string, List<Dictionary<string, string>>> ReadExcelData(string filePath)
+        {
+            var allData = new Dictionary<string, List<Dictionary<string, string>>>();
+
             using (var package = new ExcelPackage(new FileInfo(filePath)))
             {
-                var allData = new Dictionary<string, List<Dictionary<string, string>>>();
-
-                // Перебор всех листов в Excel файле
                 foreach (var worksheet in package.Workbook.Worksheets)
                 {
                     var sheetData = ReadWorksheet(worksheet);
                     allData[worksheet.Name] = sheetData;
                 }
-
-                // Экспортируем все таблицы в один файл каждого формата
-                // .txt
-                var txtFilePath = Path.Combine(downloadFolder, "all_tables.txt");
-                ExportToTxt(allData, txtFilePath);
-                downloadLinks.Add($"/downloads/{Path.GetFileName(txtFilePath)}");
-
-                // .csv
-                var csvFilePath = Path.Combine(downloadFolder, "all_tables.csv");
-                ExportToCsv(allData, csvFilePath);
-                downloadLinks.Add($"/downloads/{Path.GetFileName(csvFilePath)}");
-
-                // .xml
-                var xmlFilePath = Path.Combine(downloadFolder, "all_tables.xml");
-                ExportToXml(allData, xmlFilePath);
-                downloadLinks.Add($"/downloads/{Path.GetFileName(xmlFilePath)}");
-
-                // .yaml
-                var yamlFilePath = Path.Combine(downloadFolder, "all_tables.yaml");
-                ExportToYaml(allData, yamlFilePath);
-                downloadLinks.Add($"/downloads/{Path.GetFileName(yamlFilePath)}");
             }
 
-            return downloadLinks;
+            return allData;
         }
 
-        // Метод для чтения данных с листа Excel
+        // Чтение данных с листа Excel
         private List<Dictionary<string, string>> ReadWorksheet(ExcelWorksheet worksheet)
         {
             var data = new List<Dictionary<string, string>>();
-            var rowCount = worksheet.Dimension.Rows;
-            var columnCount = worksheet.Dimension.Columns;
+            var headers = worksheet.Cells[1, 1, 1, worksheet.Dimension.Columns]
+                           .Select(cell => cell.Text)
+                           .ToList();
 
-            // Прочитать заголовки
-            var headers = new List<string>();
-            for (int col = 1; col <= columnCount; col++)
-            {
-                headers.Add(worksheet.Cells[1, col].Text);
-            }
-
-            // Прочитать данные и создать словари для каждой строки
-            for (int row = 2; row <= rowCount; row++)
+            for (int row = 2; row <= worksheet.Dimension.Rows; row++)
             {
                 var rowData = new Dictionary<string, string>();
-                for (int col = 1; col <= columnCount; col++)
+                for (int col = 1; col <= worksheet.Dimension.Columns; col++)
                 {
-                    var header = headers[col - 1];
-                    var value = worksheet.Cells[row, col].Text;
-                    rowData[header] = value;
+                    rowData[headers[col - 1]] = worksheet.Cells[row, col].Text;
                 }
                 data.Add(rowData);
             }
@@ -130,135 +104,84 @@ namespace Practic1_2024.Controllers
             return data;
         }
 
-        private void ExportToTxt(Dictionary<string, List<Dictionary<string, string>>> allData, string filePath)
+        // Экспорт в формат .txt
+        private string ExportToTxt(Dictionary<string, List<Dictionary<string, string>>> allData)
         {
+            var filePath = Path.Combine(_downloadFolder, "all_tables.txt");
             var sb = new StringBuilder();
 
-            // Для каждой таблицы добавляем название таблицы и ее содержимое
             foreach (var table in allData)
             {
-                sb.AppendLine($"{table.Key}");
-
-                // Записываем заголовки
-                if (table.Value.Count > 0)
-                {
-                    var headers = table.Value.First().Keys.ToList();
-                    sb.AppendLine(string.Join(";", headers));
-                }
-
-                // Записываем строки
+                sb.AppendLine(table.Key);
+                sb.AppendLine(string.Join(";", table.Value.First().Keys));
                 foreach (var row in table.Value)
                 {
-                    // Проверяем, что строка не пустая, чтобы избежать добавления пустых строк
-                    var rowData = string.Join(";", row.Values);
-                    if (!string.IsNullOrWhiteSpace(rowData))
-                    {
-                        sb.AppendLine(rowData);
-                    }
+                    sb.AppendLine(string.Join(";", row.Values));
                 }
-
-                // Убираем добавление лишней пустой строки после каждой таблицы
-                sb.AppendLine(); // Оставляем эту строку, если нужно, но можно убрать, если она лишняя
+                sb.AppendLine(); // Пустая строка между таблицами
             }
 
-            // Сохраняем файл
-            System.IO.File.WriteAllText(filePath, sb.ToString().TrimEnd()); // .TrimEnd() удаляет последние пустые строки
+            System.IO.File.WriteAllText(filePath, sb.ToString().TrimEnd());
+            return $"/downloads/{Path.GetFileName(filePath)}";
         }
-        private void ExportToCsv(Dictionary<string, List<Dictionary<string, string>>> allData, string filePath)
+
+        // Экспорт в формат .csv
+        private string ExportToCsv(Dictionary<string, List<Dictionary<string, string>>> allData)
         {
+            var filePath = Path.Combine(_downloadFolder, "all_tables.csv");
             var sb = new StringBuilder();
 
-            // Для каждой таблицы добавляем название таблицы и ее содержимое
             foreach (var table in allData)
             {
-                sb.AppendLine($"{table.Key}");
-
-                // Записываем заголовки
-                if (table.Value.Count > 0)
-                {
-                    var headers = table.Value.First().Keys.ToList();
-                    sb.AppendLine(string.Join(";", headers));
-                }
-
-                // Записываем строки
+                sb.AppendLine(table.Key);
+                sb.AppendLine(string.Join(";", table.Value.First().Keys));
                 foreach (var row in table.Value)
                 {
-                    // Проверяем, что строка не пустая, чтобы избежать добавления пустых строк
-                    var rowData = string.Join(";", row.Values);
-                    if (!string.IsNullOrWhiteSpace(rowData))
-                    {
-                        sb.AppendLine(rowData);
-                    }
+                    sb.AppendLine(string.Join(";", row.Values));
                 }
-
-                // Убираем добавление лишней пустой строки после каждой таблицы
-                sb.AppendLine(); // Оставляем эту строку, если нужно, но можно убрать, если она лишняя
+                sb.AppendLine(); // Пустая строка между таблицами
             }
 
-            // Сохраняем файл
-            System.IO.File.WriteAllText(filePath, sb.ToString().TrimEnd()); // .TrimEnd() удаляет последние пустые строки
+            System.IO.File.WriteAllText(filePath, sb.ToString().TrimEnd());
+            return $"/downloads/{Path.GetFileName(filePath)}";
         }
 
-        private void ExportToXml(Dictionary<string, List<Dictionary<string, string>>> allData, string filePath)
+        // Экспорт в формат .xml
+        private string ExportToXml(Dictionary<string, List<Dictionary<string, string>>> allData)
         {
-            var xDocument = new XDocument();
-            var rootElement = new XElement("Tables"); // Корневой элемент для всех таблиц
+            var filePath = Path.Combine(_downloadFolder, "all_tables.xml");
+            var xDocument = new XDocument(
+                new XElement("Tables",
+                    allData.Select(table =>
+                        new XElement(SanitizeXmlName(table.Key),
+                            table.Value.Select(row =>
+                                new XElement("Row",
+                                    row.Select(col =>
+                                        new XElement(SanitizeXmlName(col.Key), col.Value))))))));
 
-            // Перебираем все таблицы в данных
-            foreach (var table in allData)
-            {
-                var tableElement = new XElement(SanitizeXmlName(table.Key)); // Элемент для каждой таблицы
-                var headers = table.Value.First().Keys.ToList(); // Заголовки
-
-                // Перебираем строки данных для таблицы
-                foreach (var row in table.Value)
-                {
-                    var rowElement = new XElement("Row"); // Элемент строки
-                    foreach (var header in headers)
-                    {
-                        // Преобразуем заголовок в допустимое имя XML элемента
-                        var sanitizedHeader = SanitizeXmlName(header);
-                        var columnElement = new XElement(sanitizedHeader, row[header]); // Элемент для каждой ячейки
-                        rowElement.Add(columnElement);
-                    }
-                    tableElement.Add(rowElement); // Добавляем строку в таблицу
-                }
-                rootElement.Add(tableElement); // Добавляем таблицу в корневой элемент
-            }
-
-            xDocument.Add(rootElement); // Добавляем все таблицы в XML
-
-            // Сохраняем XML файл
             xDocument.Save(filePath);
+            return $"/downloads/{Path.GetFileName(filePath)}";
         }
 
-        // Метод для удаления или замены недопустимых символов в имени XML элемента
-        private string SanitizeXmlName(string name)
+        // Экспорт в формат .yaml
+        private string ExportToYaml(Dictionary<string, List<Dictionary<string, string>>> allData)
         {
-            // Заменяем пробелы на подчеркивание
-            return string.IsNullOrWhiteSpace(name) ? "Unnamed" : new string(name.Select(c =>
-            {
-                // Убираем все символы, которые не могут быть использованы в именах XML элементов
-                return char.IsLetterOrDigit(c) || c == '_' ? c : '_';
-            }).ToArray());
-        }
-
-
-        public void ExportToYaml(Dictionary<string, List<Dictionary<string, string>>> allData, string yamlFilePath)
-        {
+            var filePath = Path.Combine(_downloadFolder, "all_tables.yaml");
             var serializer = new SerializerBuilder()
                 .WithNamingConvention(YamlDotNet.Serialization.NamingConventions.CamelCaseNamingConvention.Instance)
                 .Build();
 
-            // Преобразуем данные в формат YAML
             var yamlContent = serializer.Serialize(allData);
+            System.IO.File.WriteAllText(filePath, yamlContent.TrimEnd());
 
-            // Убираем лишние пробелы в конце контента
-            yamlContent = yamlContent.TrimEnd();
-
-            // Сохраняем данные в файл
-            System.IO.File.WriteAllText(yamlFilePath, yamlContent);
+            return $"/downloads/{Path.GetFileName(filePath)}";
         }
 
+        // Санитизация имен для XML
+        private string SanitizeXmlName(string name)
+        {
+            return string.IsNullOrWhiteSpace(name) ? "Unnamed" : new string(name.Select(c =>
+                char.IsLetterOrDigit(c) || c == '_' ? c : '_').ToArray());
+        }
     }
 }
