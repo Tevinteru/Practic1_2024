@@ -8,6 +8,8 @@ using System.Linq;
 using System.Xml.Serialization;
 using YamlDotNet.Serialization;
 using System.Runtime.Serialization;
+using System.Xml.Linq;
+using static Practic1_2024.Data.XmlClass;
 
 namespace Practic1_2024.Controllers
 {
@@ -199,19 +201,64 @@ namespace Practic1_2024.Controllers
 
         private void ExportToXml(Dictionary<string, List<Dictionary<string, string>>> allData, string filePath)
         {
-            var serializer = new DataContractSerializer(typeof(Dictionary<string, List<Dictionary<string, string>>>));
+            var xDocument = new XDocument();
+            var rootElement = new XElement("Tables"); // Корневой элемент для всех таблиц
 
-            using (var writer = new FileStream(filePath, FileMode.Create))
+            // Перебираем все таблицы в данных
+            foreach (var table in allData)
             {
-                serializer.WriteObject(writer, allData);
+                var tableElement = new XElement(SanitizeXmlName(table.Key)); // Элемент для каждой таблицы
+                var headers = table.Value.First().Keys.ToList(); // Заголовки
+
+                // Перебираем строки данных для таблицы
+                foreach (var row in table.Value)
+                {
+                    var rowElement = new XElement("Row"); // Элемент строки
+                    foreach (var header in headers)
+                    {
+                        // Преобразуем заголовок в допустимое имя XML элемента
+                        var sanitizedHeader = SanitizeXmlName(header);
+                        var columnElement = new XElement(sanitizedHeader, row[header]); // Элемент для каждой ячейки
+                        rowElement.Add(columnElement);
+                    }
+                    tableElement.Add(rowElement); // Добавляем строку в таблицу
+                }
+                rootElement.Add(tableElement); // Добавляем таблицу в корневой элемент
             }
+
+            xDocument.Add(rootElement); // Добавляем все таблицы в XML
+
+            // Сохраняем XML файл
+            xDocument.Save(filePath);
         }
 
-        private void ExportToYaml(Dictionary<string, List<Dictionary<string, string>>> allData, string filePath)
+        // Метод для удаления или замены недопустимых символов в имени XML элемента
+        private string SanitizeXmlName(string name)
         {
-            var serializer = new Serializer();
-            var yamlContent = serializer.Serialize(allData);
-            System.IO.File.WriteAllText(filePath, yamlContent);
+            // Заменяем пробелы на подчеркивание
+            return string.IsNullOrWhiteSpace(name) ? "Unnamed" : new string(name.Select(c =>
+            {
+                // Убираем все символы, которые не могут быть использованы в именах XML элементов
+                return char.IsLetterOrDigit(c) || c == '_' ? c : '_';
+            }).ToArray());
         }
+
+
+        public void ExportToYaml(Dictionary<string, List<Dictionary<string, string>>> allData, string yamlFilePath)
+        {
+            var serializer = new SerializerBuilder()
+                .WithNamingConvention(YamlDotNet.Serialization.NamingConventions.CamelCaseNamingConvention.Instance)
+                .Build();
+
+            // Преобразуем данные в формат YAML
+            var yamlContent = serializer.Serialize(allData);
+
+            // Убираем лишние пробелы в конце контента
+            yamlContent = yamlContent.TrimEnd();
+
+            // Сохраняем данные в файл
+            System.IO.File.WriteAllText(yamlFilePath, yamlContent);
+        }
+
     }
 }

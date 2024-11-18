@@ -11,6 +11,6 @@
         public string Address { get; set; }  // Адрес
 
         // Навигационное свойство: связь с заказами
-        public ICollection<Order> Orders { get; set; } = new List<Order>();
+        public List<Order> Orders { get; set; } = new List<Order>();
     }
 }

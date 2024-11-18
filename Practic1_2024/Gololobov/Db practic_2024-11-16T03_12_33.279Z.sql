@@ -1,0 +1,90 @@
+CREATE TABLE "Brands" (
+	"Id" SERIAL,
+	"Name" VARCHAR(100) NOT NULL,
+	PRIMARY KEY("Id")
+);
+
+
+CREATE TABLE "Categories" (
+	"Id" SERIAL,
+	"Name" VARCHAR(100) NOT NULL,
+	PRIMARY KEY("Id")
+);
+
+
+CREATE TABLE "Users" (
+	"Id" SERIAL,
+	"Name" VARCHAR(100) NOT NULL,
+	"Email" VARCHAR(100) NOT NULL UNIQUE,
+	"Password" VARCHAR(255) NOT NULL,
+	"Role" VARCHAR(50) NOT NULL,
+	"Phone" VARCHAR(20),
+	"Address" TEXT,
+	PRIMARY KEY("Id")
+);
+
+
+CREATE TABLE "Smartphones" (
+	"Id" SERIAL,
+	"Name" VARCHAR(100) NOT NULL,
+	"BrandId" INTEGER NOT NULL,
+	"Description" TEXT,
+	"Price" DECIMAL(18,2),
+	"ReleaseYear" INTEGER,
+	"SimCount" INTEGER,
+	"MemoryOptions" VARCHAR(255),
+	"ColorOptions" VARCHAR(255),
+	"CategoryId" INTEGER NOT NULL,
+	"ImageUrl" VARCHAR(255),
+	PRIMARY KEY("Id")
+);
+
+
+CREATE TABLE "SmartphoneCharacteristics" (
+	"Id" SERIAL,
+	"SmartphoneId" INTEGER NOT NULL,
+	"Characteristic" VARCHAR(100) NOT NULL,
+	"Value" VARCHAR(255) NOT NULL,
+	PRIMARY KEY("Id")
+);
+
+
+CREATE TABLE "Orders" (
+	"Id" SERIAL,
+	"UserId" INTEGER NOT NULL,
+	"TotalPrice" DECIMAL(18,2) NOT NULL,
+	"Status" VARCHAR(50) NOT NULL,
+	"CreatedAt" DATE NOT NULL,
+	"UpdatedAt" DATE NOT NULL,
+	PRIMARY KEY("Id")
+);
+
+
+CREATE TABLE "OrderItems" (
+	"Id" SERIAL,
+	"OrderId" INTEGER NOT NULL,
+	"ProductId" INTEGER NOT NULL,
+	"Quantity" INTEGER NOT NULL,
+	"Price" DECIMAL(18,2) NOT NULL,
+	PRIMARY KEY("Id")
+);
+
+
+ALTER TABLE "Smartphones"
+ADD FOREIGN KEY("BrandId") REFERENCES "Brands"("Id")
+ON UPDATE NO ACTION ON DELETE CASCADE;
+ALTER TABLE "Smartphones"
+ADD FOREIGN KEY("CategoryId") REFERENCES "Categories"("Id")
+ON UPDATE NO ACTION ON DELETE CASCADE;
+ALTER TABLE "SmartphoneCharacteristics"
+ADD FOREIGN KEY("SmartphoneId") REFERENCES "Smartphones"("Id")
+ON UPDATE NO ACTION ON DELETE CASCADE;
+ALTER TABLE "Orders"
+ADD FOREIGN KEY("UserId") REFERENCES "Users"("Id")
+ON UPDATE NO ACTION ON DELETE CASCADE;
+ALTER TABLE "OrderItems"
+ADD FOREIGN KEY("OrderId") REFERENCES "Orders"("Id")
+ON UPDATE NO ACTION ON DELETE CASCADE;
+ALTER TABLE "OrderItems"
+ADD FOREIGN KEY("ProductId") REFERENCES "Smartphones"("Id")
+ON UPDATE NO ACTION ON DELETE CASCADE;

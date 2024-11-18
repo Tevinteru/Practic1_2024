@@ -1,0 +1,103 @@
+namespace Practic1_2024.Models
+{
+    public class Brand
+    {
+        public int Id { get; set; }  // Уникальный идентификатор бренда
+        public string Name { get; set; }  // Название бренда
+
+        // Навигационное свойство: связь с коллекцией смартфонов
+        public ICollection<Smartphone> Smartphones { get; set; } = new List<Smartphone>();
+    }
+}
+namespace Practic1_2024.Models
+{
+    public class Category
+    {
+        public int Id { get; set; }  // Уникальный идентификатор категории
+        public string Name { get; set; }  // Название категории
+
+        // Навигационное свойство: связь с коллекцией смартфонов
+        public ICollection<Smartphone> Smartphones { get; set; } = new List<Smartphone>();
+    }
+}
+namespace Practic1_2024.Models
+{
+    public class Order
+    {
+        public int Id { get; set; }  // Уникальный идентификатор заказа
+        public int UserId { get; set; }  // Идентификатор пользователя
+        public User User { get; set; }  // Навигационное свойство для пользователя
+        public decimal TotalPrice { get; set; }  // Общая стоимость заказа
+        public string Status { get; set; }  // Статус заказа (например, "В обработке", "Доставлен")
+        public DateOnly CreatedAt { get; set; }  // Дата создания заказа
+        public DateOnly UpdatedAt { get; set; }  // Дата последнего обновления заказа
+
+        // Навигационное свойство: связь с позициями в заказах
+        public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+    }
+}
+namespace Practic1_2024.Models
+{
+    public class OrderItem
+    {
+        public int Id { get; set; }  // Уникальный идентификатор позиции в заказе
+        public int OrderId { get; set; }  // Идентификатор заказа
+        public Order Order { get; set; }  // Навигационное свойство для заказа
+        public int SmartphoneId { get; set; }  // Идентификатор товара (связь с таблицей смартфонов)
+        public Smartphone Smartphone { get; set; }  // Навигационное свойство для товара
+        public int Quantity { get; set; }  // Количество товара
+        public decimal Price { get; set; }  // Цена товара на момент покупки
+    }
+}
+namespace Practic1_2024.Models
+{
+    public class Smartphone
+    {
+        public int Id { get; set; }  // Уникальный идентификатор смартфона
+        public string Name { get; set; }  // Название смартфона
+        public int BrandId { get; set; }  // Идентификатор бренда
+        public Brand Brand { get; set; }  // Навигационное свойство для бренда
+        public string Description { get; set; }  // Описание смартфона
+        public decimal Price { get; set; }  // Цена смартфона
+        public int ReleaseYear { get; set; }  // Год выпуска
+        public int SimCount { get; set; }  // Количество SIM-карт
+        public string MemoryOptions { get; set; }  // Опции памяти
+        public string ColorOptions { get; set; }  // Опции цвета
+        public int CategoryId { get; set; }  // Идентификатор категории
+        public Category Category { get; set; }  // Навигационное свойство для категории
+        public string ImageUrl { get; set; }  // Ссылка на изображение смартфона
+
+        // Навигационное свойство: связь с характеристиками
+        public ICollection<SmartphoneCharacteristic> Characteristics { get; set; } = new List<SmartphoneCharacteristic>();
+
+        // Навигационное свойство: связь с позициями в заказах
+        public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+    }
+}
+namespace Practic1_2024.Models
+{
+    public class SmartphoneCharacteristic
+    {
+        public int Id { get; set; }  // Уникальный идентификатор характеристики
+        public int SmartphoneId { get; set; }  // Идентификатор смартфона
+        public Smartphone Smartphone { get; set; }  // Навигационное свойство для смартфона
+        public string Characteristic { get; set; }  // Тип характеристики (например, "Процессор")
+        public string Value { get; set; }  // Значение характеристики (например, "Snapdragon 888")
+    }
+}
+namespace Practic1_2024.Models
+{
+    public class User
+    {
+        public int Id { get; set; }  // Уникальный идентификатор пользователя
+        public string Name { get; set; }  // Имя пользователя
+        public string Email { get; set; }  // Электронная почта
+        public string Password { get; set; }  // Пароль
+        public string Role { get; set; }  // Роль пользователя (например, "admin", "customer")
+        public string Phone { get; set; }  // Телефон
+        public string Address { get; set; }  // Адрес
+
+        // Навигационное свойство: связь с заказами
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
+    }
+}

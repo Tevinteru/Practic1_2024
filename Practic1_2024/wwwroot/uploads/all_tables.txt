@@ -30,7 +30,7 @@ Xiaomi Mi 11;3;Бюджетный Xiaomi;29999,00;2021;2;64GB, 128GB;Синий,
 Huawei P40;4;Смартфон Huawei;49999,00;2020;2;128GB, 256GB;Зеленый, Черный;1;/images/p40.jpg
 OnePlus 9 Pro;5;OnePlus флагман;74999,00;2021;2;128GB, 256GB;Серебристый, Черный;1;/images/oneplus9.jpg
 
-SmartphoneCharacteristics 
+SmartphoneCharacteristics
 SmartphoneId;Characteristic;Value
 1;Диагональ экрана;6.1 дюйма
 2;Процессор;A15 Bionic
@@ -47,7 +47,7 @@ UserId;TotalPrice;Status;CreatedAt;UpdatedAt
 5;74999,00;Завершен;01.05.2024;02.05.2024
 
 OrderItems
-OrderId;ProductId;Quantity;Price
+OrderId;SmartphoneId;Quantity;Price
 1;1;1;89999,00
 2;2;1;109999,00
 3;3;1;29999,00

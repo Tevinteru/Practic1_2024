@@ -11,6 +11,8 @@ using Practic1_2024.Models;
 using Microsoft.EntityFrameworkCore;
 using Practic1_2024.Data;
 using System.Globalization;
+using static Practic1_2024.Data.XmlClass;
+using System.Xml.Linq;
 
 namespace Practic1_2024.Controllers
 {
@@ -64,7 +66,7 @@ namespace Practic1_2024.Controllers
                     await ImportFromTxt(filePath);
                     break;
                 case ".xml":
-                    await ImportFromXml(filePath);
+                    await ImportXmlDataToDatabase(filePath);
                     break;
                 case ".yaml":
                 case ".yml":
@@ -133,77 +135,224 @@ namespace Practic1_2024.Controllers
                 }
             }
         }
-
-
-        //// Импорт данных из CSV файла
-        //private async Task ImportFromCsv(string filePath)
-        //{
-        //    var lines = System.IO.File.ReadAllLines(filePath);
-        //    string currentTable = null;
-        //    List<string> headers = null;
-
-        //    foreach (var line in lines)
-        //    {
-        //        if (string.IsNullOrWhiteSpace(line)) continue;
-
-        //        var row = line.Split(';').ToList();
-
-        //        if (row.Count == 1)
-        //        {
-        //            currentTable = row[0];
-        //            continue;
-        //        }
-
-        //        // Парсим строки данных
-        //        switch (currentTable)
-        //        {
-        //            case "Categories":
-        //                await ImportCategories(row);
-        //                break;
-        //            case "Users":
-        //                await ImportUsers(row);
-        //                break;
-        //            case "Brands":
-        //                await ImportBrands(row);
-        //                break;
-        //            case "Smartphones":
-        //                await ImportSmartphones(row);
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-        //}
-
-        // Импорт данных из XML файла
-        private async Task ImportFromXml(string filePath)
+        // Метод для обработки XML файла и импорта данных в базу данных
+        private async Task ImportXmlDataToDatabase(string filePath)
         {
-            // Чтение XML в список объектов
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Category>)); // Здесь можно выбрать любую модель
-            using (var reader = new StreamReader(filePath))
+            // Загружаем XML документ
+            XDocument xDocument = XDocument.Load(filePath);
+
+            // Импортируем категории
+            var categories = xDocument.Descendants("Categories").Elements("Row").Select(row => new Category
             {
-                var categories = (List<Category>)serializer.Deserialize(reader);
-                foreach (var category in categories)
-                {
-                    _context.Categories.Add(category);
-                }
-                await _context.SaveChangesAsync();
-            }
+                Name = row.Element("Name")?.Value
+            }).ToList();
+            _context.Categories.AddRange(categories);
+            await _context.SaveChangesAsync();
+
+            // Импортируем бренды
+            var brands = xDocument.Descendants("Brands").Elements("Row").Select(row => new Brand
+            {
+                Name = row.Element("Name")?.Value
+            }).ToList();
+            _context.Brands.AddRange(brands);
+            await _context.SaveChangesAsync();
+
+            // Импортируем пользователей
+            var users = xDocument.Descendants("Users").Elements("Row").Select(row => new User
+            {
+                Name = row.Element("Name")?.Value,
+                Email = row.Element("Email")?.Value,
+                Password = row.Element("Password")?.Value,
+                Role = row.Element("Role")?.Value,
+                Phone = row.Element("Phone")?.Value,
+                Address = row.Element("Address")?.Value
+            }).ToList();
+            _context.Users.AddRange(users);
+            await _context.SaveChangesAsync();
+
+            // Импортируем смартфоны
+            var smartphones = xDocument.Descendants("Smartphones").Elements("Row").Select(row => new Smartphone
+            {
+                Name = row.Element("Name")?.Value,
+                BrandId = int.Parse(row.Element("BrandId")?.Value ?? "0"),
+                Description = row.Element("Description")?.Value,
+                Price = decimal.Parse(row.Element("Price")?.Value.Replace(',', '.'), CultureInfo.InvariantCulture),
+                ReleaseYear = int.Parse(row.Element("ReleaseYear")?.Value ?? "0"),
+                SimCount = int.Parse(row.Element("SimCount")?.Value ?? "0"),
+                MemoryOptions = row.Element("MemoryOptions")?.Value,
+                ColorOptions = row.Element("ColorOptions")?.Value,
+                CategoryId = int.Parse(row.Element("CategoryId")?.Value ?? "0"),
+                ImageUrl = row.Element("ImageUrl")?.Value
+            }).ToList();
+            _context.Smartphones.AddRange(smartphones);
+            await _context.SaveChangesAsync();
+
+
+            // Импортируем характеристики смартфонов
+            var smartphoneCharacteristics = xDocument.Descendants("SmartphoneCharacteristics").Elements("Row").Select(row => new SmartphoneCharacteristic
+            {
+                SmartphoneId = int.Parse(row.Element("SmartphoneId")?.Value ?? "0"),
+                Characteristic = row.Element("Characteristic")?.Value,
+                Value = row.Element("Value")?.Value
+            }).ToList();
+            _context.SmartphoneCharacteristics.AddRange(smartphoneCharacteristics);
+            await _context.SaveChangesAsync();
+
+            // Импортируем заказы (Orders) - важный шаг!
+            var orders = xDocument.Descendants("Orders").Elements("Row").Select(row => new Order
+            {
+                UserId = int.Parse(row.Element("UserId")?.Value ?? "0"),
+                TotalPrice = decimal.Parse(row.Element("TotalPrice")?.Value.Replace(',', '.'), CultureInfo.InvariantCulture),
+                Status = row.Element("Status")?.Value,
+                CreatedAt = DateOnly.Parse(row.Element("CreatedAt")?.Value),
+                UpdatedAt = DateOnly.Parse(row.Element("UpdatedAt")?.Value)
+            }).ToList();
+            _context.Orders.AddRange(orders);
+
+            // Сохраняем заказы (Orders) в базу данных, чтобы у нас были валидные OrderId для OrderItems
+            await _context.SaveChangesAsync();
+
+            // Теперь вставляем OrderItems
+            var orderItems = xDocument.Descendants("OrderItems").Elements("Row").Select(row => new OrderItem
+            {
+                OrderId = int.Parse(row.Element("OrderId")?.Value ?? "0"), // Убедитесь, что OrderId существует в таблице Orders
+                SmartphoneId = int.Parse(row.Element("SmartphoneId")?.Value ?? "0"),
+                Quantity = int.Parse(row.Element("Quantity")?.Value ?? "0"),
+                Price = decimal.Parse(row.Element("Price")?.Value.Replace(',', '.'), CultureInfo.InvariantCulture)
+            }).ToList();
+            _context.OrderItems.AddRange(orderItems);
+
+            // Сохраняем OrderItems в базу данных
+            await _context.SaveChangesAsync();
         }
 
         // Импорт данных из YAML файла
         private async Task ImportFromYaml(string filePath)
         {
-            // Чтение YAML
             var yamlContent = System.IO.File.ReadAllText(filePath);
-            var deserializer = new Deserializer();
-            var categories = deserializer.Deserialize<List<Category>>(yamlContent);
+            var deserializer = new DeserializerBuilder()
+                .WithNamingConvention(YamlDotNet.Serialization.NamingConventions.CamelCaseNamingConvention.Instance)
+                .Build();
 
-            foreach (var category in categories)
+            // Десериализация содержимого YAML в словарь
+            var data = deserializer.Deserialize<Dictionary<string, List<Dictionary<string, string>>>>(yamlContent);
+
+            // Импортируем данные в соответствующие таблицы
+            if (data.ContainsKey("Categories"))
             {
-                _context.Categories.Add(category);
+                foreach (var item in data["Categories"])
+                {
+                    var category = new Category
+                    {
+                        Name = item["Name"]
+                    };
+                    _context.Categories.Add(category);
+                }
+                await _context.SaveChangesAsync();
             }
 
+            if (data.ContainsKey("Brands"))
+            {
+                foreach (var item in data["Brands"])
+                {
+                    var brand = new Brand
+                    {
+                        Name = item["Name"]
+                    };
+                    _context.Brands.Add(brand);
+                }
+                await _context.SaveChangesAsync();
+            }
+
+            if (data.ContainsKey("Smartphones"))
+            {
+                foreach (var item in data["Smartphones"])
+                {
+                    var smartphone = new Smartphone
+                    {
+                        Name = item["Name"],
+                        BrandId = int.Parse(item["BrandId"]),
+                        Description = item["Description"],
+                        Price = decimal.Parse(item["Price"]),
+                        ReleaseYear = int.Parse(item["ReleaseYear"]),
+                        SimCount = int.Parse(item["SimCount"]),
+                        MemoryOptions = item["MemoryOptions"],
+                        ColorOptions = item["ColorOptions"],
+                        CategoryId = int.Parse(item["CategoryId"]),
+                        ImageUrl = item["ImageUrl"]
+                    };
+                    _context.Smartphones.Add(smartphone);
+                }
+                await _context.SaveChangesAsync();
+            }
+
+            if (data.ContainsKey("SmartphoneCharacteristics"))
+            {
+                foreach (var item in data["SmartphoneCharacteristics"])
+                {
+                    var characteristic = new SmartphoneCharacteristic
+                    {
+                        SmartphoneId = int.Parse(item["SmartphoneId"]),
+                        Characteristic = item["Characteristic"],
+                        Value = item["Value"]
+                    };
+                    _context.SmartphoneCharacteristics.Add(characteristic);
+                }
+                await _context.SaveChangesAsync();
+            }
+
+            if (data.ContainsKey("Users"))
+            {
+                foreach (var item in data["Users"])
+                {
+                    var user = new User
+                    {
+                        Name = item["Name"],
+                        Email = item["Email"],
+                        Password = item["Password"],
+                        Role = item["Role"],
+                        Phone = item["Phone"],
+                        Address = item["Address"]
+                    };
+                    _context.Users.Add(user);
+                }
+                await _context.SaveChangesAsync();
+            }
+
+            if (data.ContainsKey("Orders"))
+            {
+                foreach (var item in data["Orders"])
+                {
+                    var order = new Order
+                    {
+                        UserId = int.Parse(item["UserId"]),
+                        TotalPrice = decimal.Parse(item["TotalPrice"]),
+                        Status = item["Status"],
+                        CreatedAt = DateOnly.Parse(item["CreatedAt"]),
+                        UpdatedAt = DateOnly.Parse(item["UpdatedAt"])
+                    };
+                    _context.Orders.Add(order);
+                }
+                await _context.SaveChangesAsync();
+            }
+
+            if (data.ContainsKey("OrderItems"))
+            {
+                foreach (var item in data["OrderItems"])
+                {
+                    var orderItem = new OrderItem
+                    {
+                        OrderId = int.Parse(item["OrderId"]),
+                        SmartphoneId = int.Parse(item["SmartphoneId"]),
+                        Quantity = int.Parse(item["Quantity"]),
+                        Price = decimal.Parse(item["Price"])
+                    };
+                    _context.OrderItems.Add(orderItem);
+                }
+                await _context.SaveChangesAsync();
+            }
+
+            // Сохраняем все изменения в базе данных
             await _context.SaveChangesAsync();
         }
         // Пример импорта данных для Categories (категорий)

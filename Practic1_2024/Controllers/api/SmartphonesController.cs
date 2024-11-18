@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Practic1_2024.Data;
 using Practic1_2024.Models;
 
-namespace Practic1_2024.Controllers.Api
+namespace Practic1_2024.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -25,14 +20,22 @@ namespace Practic1_2024.Controllers.Api
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Smartphone>>> GetSmartphones()
         {
-            return await _context.Smartphones.ToListAsync();
+            return await _context.Smartphones
+                .Include(s => s.Brand)           // Включаем данные бренда
+                .Include(s => s.Category)        // Включаем данные категории
+                .Include(s => s.Characteristics) // Включаем характеристики смартфона
+                .ToListAsync();
         }
 
         // GET: api/Smartphones/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Smartphone>> GetSmartphone(int id)
         {
-            var smartphone = await _context.Smartphones.FindAsync(id);
+            var smartphone = await _context.Smartphones
+                .Include(s => s.Brand)           // Включаем данные бренда
+                .Include(s => s.Category)        // Включаем данные категории
+                .Include(s => s.Characteristics) // Включаем характеристики
+                .FirstOrDefaultAsync(s => s.Id == id);
 
             if (smartphone == null)
             {
@@ -43,7 +46,6 @@ namespace Practic1_2024.Controllers.Api
         }
 
         // PUT: api/Smartphones/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSmartphone(int id, Smartphone smartphone)
         {
@@ -74,14 +76,13 @@ namespace Practic1_2024.Controllers.Api
         }
 
         // POST: api/Smartphones
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Smartphone>> PostSmartphone(Smartphone smartphone)
         {
             _context.Smartphones.Add(smartphone);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSmartphone", new { id = smartphone.Id }, smartphone);
+            return CreatedAtAction(nameof(GetSmartphone), new { id = smartphone.Id }, smartphone);
         }
 
         // DELETE: api/Smartphones/5

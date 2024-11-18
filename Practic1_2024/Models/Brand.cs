@@ -6,6 +6,6 @@
         public string Name { get; set; }  // Название бренда
 
         // Навигационное свойство: связь с коллекцией смартфонов
-        public ICollection<Smartphone> Smartphones { get; set; } = new List<Smartphone>();
+        public List<Smartphone> Smartphones { get; set; } = new List<Smartphone>();
     }
 }
