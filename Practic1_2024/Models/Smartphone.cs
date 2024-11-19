@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 
 namespace Practic1_2024.Models
 {
@@ -8,6 +9,8 @@ namespace Practic1_2024.Models
         public string Name { get; set; }  // Название смартфона
         public int BrandId { get; set; }  // Идентификатор бренда
         [JsonIgnore]  // Отключаем связь с Brand для предотвращения циклов
+        [XmlIgnore]  // Это исключает циклическую зависимость
+
         public Brand Brand { get; set; }  // Навигационное свойство для бренда
         public string Description { get; set; }  // Описание смартфона
         public decimal Price { get; set; }  // Цена смартфона
@@ -17,6 +20,8 @@ namespace Practic1_2024.Models
         public string ColorOptions { get; set; }  // Опции цвета
         public int CategoryId { get; set; }  // Идентификатор категории
         [JsonIgnore]  // Отключаем связь с Brand для предотвращения циклов
+        [XmlIgnore]  // Это исключает циклическую зависимость
+
         public Category Category { get; set; }  // Навигационное свойство для категории
         public string ImageUrl { get; set; }  // Ссылка на изображение смартфона
 

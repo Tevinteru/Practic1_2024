@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 
 namespace Practic1_2024.Models
 {
@@ -7,6 +8,7 @@ namespace Practic1_2024.Models
         public int Id { get; set; }  // Уникальный идентификатор заказа
         public int UserId { get; set; }  // Идентификатор пользователя
         [JsonIgnore]  // Отключаем связь с Brand для предотвращения циклов
+        [XmlIgnore]  // Это исключает циклическую зависимость
         public User User { get; set; }  // Навигационное свойство для пользователя
         public decimal TotalPrice { get; set; }  // Общая стоимость заказа
         public string Status { get; set; }  // Статус заказа (например, "В обработке", "Доставлен")

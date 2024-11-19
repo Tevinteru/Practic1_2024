@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Экспорт данных";
+}
+
+<h2>Экспорт данных</h2>
+
+<div>
+    <form asp-action="ExportToCsv">
+        <button type="submit" class="btn btn-primary">Экспорт в CSV</button>
+    </form>
+</div>
+<br>
+<div>
+    <form  asp-action="ExportToTxt">
+        <button type="submit" class="btn btn-primary">Экспорт в TXT</button>
+    </form>
+</div>
+<br>
+<div>
+    <form asp-action="ExportToXml">
+        <button type="submit" class="btn btn-primary">Экспорт в XML</button>
+    </form>
+</div>
+<br>
+<div>
+    <form asp-action="ExportToYaml">
+        <button type="submit" class="btn btn-primary">Экспорт в YAML</button>
+    </form>
+</div>

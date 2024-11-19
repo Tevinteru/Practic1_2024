@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Tables>
+<Categories>
+  <Row><Name>Флагманы</Name></Row>
+  <Row><Name>Бюджетные смартфоны</Name></Row>
+  <Row><Name>Игровые смартфоны</Name></Row>
+  <Row><Name>Смартфоны с хорошей камерой</Name></Row>
+  <Row><Name>Смартфоны с большим аккумулятором</Name></Row>
+  <Row><Name>Флагманы</Name></Row>
+  <Row><Name>Бюджетные смартфоны</Name></Row>
+  <Row><Name>Игровые смартфоны</Name></Row>
+  <Row><Name>Смартфоны с хорошей камерой</Name></Row>
+  <Row><Name>Смартфоны с большим аккумулятором</Name></Row>
+  <Row><Name>Флагманы</Name></Row>
+  <Row><Name>Бюджетные смартфоны</Name></Row>
+  <Row><Name>Игровые смартфоны</Name></Row>
+  <Row><Name>Смартфоны с хорошей камерой</Name></Row>
+  <Row><Name>Смартфоны с большим аккумулятором</Name></Row>
+  <Row><Name>Флагманы</Name></Row>
+  <Row><Name>Бюджетные смартфоны</Name></Row>
+  <Row><Name>Игровые смартфоны</Name></Row>
+  <Row><Name>Смартфоны с хорошей камерой</Name></Row>
+  <Row><Name>Смартфоны с большим аккумулятором</Name></Row>
+</Categories>
+<Brands>
+  <Row><Name>Samsung</Name></Row>
+  <Row><Name>Apple</Name></Row>
+  <Row><Name>Xiaomi</Name></Row>
+  <Row><Name>Huawei</Name></Row>
+  <Row><Name>OnePlus</Name></Row>
+  <Row><Name>Samsung</Name></Row>
+  <Row><Name>Apple</Name></Row>
+  <Row><Name>Xiaomi</Name></Row>
+  <Row><Name>Huawei</Name></Row>
+  <Row><Name>OnePlus</Name></Row>
+  <Row><Name>Samsung</Name></Row>
+  <Row><Name>Apple</Name></Row>
+  <Row><Name>Xiaomi</Name></Row>
+  <Row><Name>Huawei</Name></Row>
+  <Row><Name>OnePlus</Name></Row>
+  <Row><Name>Samsung</Name></Row>
+  <Row><Name>Apple</Name></Row>
+  <Row><Name>Xiaomi</Name></Row>
+  <Row><Name>Huawei</Name></Row>
+  <Row><Name>OnePlus</Name></Row>
+</Brands>
+<Users>
+  <Row><Name>Иван Иванов</Name><Email>ivan@example.com</Email><Password>12345</Password><Role>Пользователь</Role><Phone>79991234567</Phone><Address>Москва, ул. Ленина</Address></Row>
+  <Row><Name>Ольга Петрова</Name><Email>olga@example.com</Email><Password>54321</Password><Role>Администратор</Role><Phone>79992345678</Phone><Address>СПб, ул. Пушкина</Address></Row>
+  <Row><Name>Дмитрий Смирнов</Name><Email>dmitry@example.com</Email><Password>67890</Password><Role>Пользователь</Role><Phone>79993456789</Phone><Address>Казань, ул. Суворова</Address></Row>
+  <Row><Name>Мария Васильева</Name><Email>maria@example.com</Email><Password>11223</Password><Role>Администратор</Role><Phone>79994567890</Phone><Address>Екатеринбург, ул. Чапаева</Address></Row>
+  <Row><Name>Сергей Новиков</Name><Email>sergey@example.com</Email><Password>44556</Password><Role>Пользователь</Role><Phone>79995678901</Phone><Address>Нижний Новгород, ул. Горького</Address></Row>
+  <Row><Name>Иван Иванов</Name><Email>ivan@example.com</Email><Password>12345</Password><Role>Пользователь</Role><Phone>79991234567</Phone><Address>Москва, ул. Ленина</Address></Row>
+  <Row><Name>Ольга Петрова</Name><Email>olga@example.com</Email><Password>54321</Password><Role>Администратор</Role><Phone>79992345678</Phone><Address>СПб, ул. Пушкина</Address></Row>
+  <Row><Name>Дмитрий Смирнов</Name><Email>dmitry@example.com</Email><Password>67890</Password><Role>Пользователь</Role><Phone>79993456789</Phone><Address>Казань, ул. Суворова</Address></Row>
+  <Row><Name>Мария Васильева</Name><Email>maria@example.com</Email><Password>11223</Password><Role>Администратор</Role><Phone>79994567890</Phone><Address>Екатеринбург, ул. Чапаева</Address></Row>
+  <Row><Name>Сергей Новиков</Name><Email>sergey@example.com</Email><Password>44556</Password><Role>Пользователь</Role><Phone>79995678901</Phone><Address>Нижний Новгород, ул. Горького</Address></Row>
+  <Row><Name>Иван Иванов</Name><Email>ivan@example.com</Email><Password>12345</Password><Role>Пользователь</Role><Phone>79991234567</Phone><Address>Москва, ул. Ленина</Address></Row>
+  <Row><Name>Ольга Петрова</Name><Email>olga@example.com</Email><Password>54321</Password><Role>Администратор</Role><Phone>79992345678</Phone><Address>СПб, ул. Пушкина</Address></Row>
+  <Row><Name>Дмитрий Смирнов</Name><Email>dmitry@example.com</Email><Password>67890</Password><Role>Пользователь</Role><Phone>79993456789</Phone><Address>Казань, ул. Суворова</Address></Row>
+  <Row><Name>Мария Васильева</Name><Email>maria@example.com</Email><Password>11223</Password><Role>Администратор</Role><Phone>79994567890</Phone><Address>Екатеринбург, ул. Чапаева</Address></Row>
+  <Row><Name>Сергей Новиков</Name><Email>sergey@example.com</Email><Password>44556</Password><Role>Пользователь</Role><Phone>79995678901</Phone><Address>Нижний Новгород, ул. Горького</Address></Row>
+  <Row><Name>Иван Иванов</Name><Email>ivan@example.com</Email><Password>12345</Password><Role>Пользователь</Role><Phone>79991234567</Phone><Address>Москва, ул. Ленина</Address></Row>
+  <Row><Name>Ольга Петрова</Name><Email>olga@example.com</Email><Password>54321</Password><Role>Администратор</Role><Phone>79992345678</Phone><Address>СПб, ул. Пушкина</Address></Row>
+  <Row><Name>Дмитрий Смирнов</Name><Email>dmitry@example.com</Email><Password>67890</Password><Role>Пользователь</Role><Phone>79993456789</Phone><Address>Казань, ул. Суворова</Address></Row>
+  <Row><Name>Мария Васильева</Name><Email>maria@example.com</Email><Password>11223</Password><Role>Администратор</Role><Phone>79994567890</Phone><Address>Екатеринбург, ул. Чапаева</Address></Row>
+  <Row><Name>Сергей Новиков</Name><Email>sergey@example.com</Email><Password>44556</Password><Role>Пользователь</Role><Phone>79995678901</Phone><Address>Нижний Новгород, ул. Горького</Address></Row>
+</Users>
+<Smartphones>
+  <Row><Name>Galaxy S23</Name><BrandId>1</BrandId><Description>Флагман от Samsung</Description><Price>89999.00</Price><ReleaseYear>2023</ReleaseYear><SimCount>2</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Черный, Белый</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/s23.jpg</ImageUrl></Row>
+  <Row><Name>iPhone 14</Name><BrandId>2</BrandId><Description>Новый iPhone</Description><Price>109999.00</Price><ReleaseYear>2022</ReleaseYear><SimCount>1</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Черный, Золотой</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/iphone14.jpg</ImageUrl></Row>
+  <Row><Name>Xiaomi Mi 11</Name><BrandId>3</BrandId><Description>Бюджетный Xiaomi</Description><Price>29999.00</Price><ReleaseYear>2021</ReleaseYear><SimCount>2</SimCount><MemoryOptions>64GB, 128GB</MemoryOptions><ColorOptions>Синий, Черный</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/mi11.jpg</ImageUrl></Row>
+  <Row><Name>Huawei P40</Name><BrandId>4</BrandId><Description>Смартфон Huawei</Description><Price>49999.00</Price><ReleaseYear>2020</ReleaseYear><SimCount>2</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Зеленый, Черный</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/p40.jpg</ImageUrl></Row>
+  <Row><Name>OnePlus 9 Pro</Name><BrandId>5</BrandId><Description>OnePlus флагман</Description><Price>74999.00</Price><ReleaseYear>2021</ReleaseYear><SimCount>2</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Серебристый, Черный</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/oneplus9.jpg</ImageUrl></Row>
+  <Row><Name>Galaxy S23</Name><BrandId>1</BrandId><Description>Флагман от Samsung</Description><Price>89999.00</Price><ReleaseYear>2023</ReleaseYear><SimCount>2</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Черный, Белый</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/s23.jpg</ImageUrl></Row>
+  <Row><Name>iPhone 14</Name><BrandId>2</BrandId><Description>Новый iPhone</Description><Price>109999.00</Price><ReleaseYear>2022</ReleaseYear><SimCount>1</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Черный, Золотой</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/iphone14.jpg</ImageUrl></Row>
+  <Row><Name>Xiaomi Mi 11</Name><BrandId>3</BrandId><Description>Бюджетный Xiaomi</Description><Price>29999.00</Price><ReleaseYear>2021</ReleaseYear><SimCount>2</SimCount><MemoryOptions>64GB, 128GB</MemoryOptions><ColorOptions>Синий, Черный</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/mi11.jpg</ImageUrl></Row>
+  <Row><Name>Huawei P40</Name><BrandId>4</BrandId><Description>Смартфон Huawei</Description><Price>49999.00</Price><ReleaseYear>2020</ReleaseYear><SimCount>2</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Зеленый, Черный</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/p40.jpg</ImageUrl></Row>
+  <Row><Name>OnePlus 9 Pro</Name><BrandId>5</BrandId><Description>OnePlus флагман</Description><Price>74999.00</Price><ReleaseYear>2021</ReleaseYear><SimCount>2</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Серебристый, Черный</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/oneplus9.jpg</ImageUrl></Row>
+  <Row><Name>Galaxy S23</Name><BrandId>1</BrandId><Description>Флагман от Samsung</Description><Price>89999.00</Price><ReleaseYear>2023</ReleaseYear><SimCount>2</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Черный, Белый</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/s23.jpg</ImageUrl></Row>
+  <Row><Name>iPhone 14</Name><BrandId>2</BrandId><Description>Новый iPhone</Description><Price>109999.00</Price><ReleaseYear>2022</ReleaseYear><SimCount>1</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Черный, Золотой</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/iphone14.jpg</ImageUrl></Row>
+  <Row><Name>Xiaomi Mi 11</Name><BrandId>3</BrandId><Description>Бюджетный Xiaomi</Description><Price>29999.00</Price><ReleaseYear>2021</ReleaseYear><SimCount>2</SimCount><MemoryOptions>64GB, 128GB</MemoryOptions><ColorOptions>Синий, Черный</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/mi11.jpg</ImageUrl></Row>
+  <Row><Name>Huawei P40</Name><BrandId>4</BrandId><Description>Смартфон Huawei</Description><Price>49999.00</Price><ReleaseYear>2020</ReleaseYear><SimCount>2</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Зеленый, Черный</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/p40.jpg</ImageUrl></Row>
+  <Row><Name>OnePlus 9 Pro</Name><BrandId>5</BrandId><Description>OnePlus флагман</Description><Price>74999.00</Price><ReleaseYear>2021</ReleaseYear><SimCount>2</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Серебристый, Черный</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/oneplus9.jpg</ImageUrl></Row>
+  <Row><Name>Galaxy S23</Name><BrandId>1</BrandId><Description>Флагман от Samsung</Description><Price>89999.00</Price><ReleaseYear>2023</ReleaseYear><SimCount>2</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Черный, Белый</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/s23.jpg</ImageUrl></Row>
+  <Row><Name>iPhone 14</Name><BrandId>2</BrandId><Description>Новый iPhone</Description><Price>109999.00</Price><ReleaseYear>2022</ReleaseYear><SimCount>1</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Черный, Золотой</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/iphone14.jpg</ImageUrl></Row>
+  <Row><Name>Xiaomi Mi 11</Name><BrandId>3</BrandId><Description>Бюджетный Xiaomi</Description><Price>29999.00</Price><ReleaseYear>2021</ReleaseYear><SimCount>2</SimCount><MemoryOptions>64GB, 128GB</MemoryOptions><ColorOptions>Синий, Черный</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/mi11.jpg</ImageUrl></Row>
+  <Row><Name>Huawei P40</Name><BrandId>4</BrandId><Description>Смартфон Huawei</Description><Price>49999.00</Price><ReleaseYear>2020</ReleaseYear><SimCount>2</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Зеленый, Черный</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/p40.jpg</ImageUrl></Row>
+  <Row><Name>OnePlus 9 Pro</Name><BrandId>5</BrandId><Description>OnePlus флагман</Description><Price>74999.00</Price><ReleaseYear>2021</ReleaseYear><SimCount>2</SimCount><MemoryOptions>128GB, 256GB</MemoryOptions><ColorOptions>Серебристый, Черный</ColorOptions><CategoryId>1</CategoryId><ImageUrl>/images/oneplus9.jpg</ImageUrl></Row>
+</Smartphones>
+<SmartphoneCharacteristics>
+  <Row><SmartphoneId>1</SmartphoneId><Characteristic>Диагональ экрана</Characteristic><Value>6.1 дюйма</Value></Row>
+  <Row><SmartphoneId>2</SmartphoneId><Characteristic>Процессор</Characteristic><Value>A15 Bionic</Value></Row>
+  <Row><SmartphoneId>3</SmartphoneId><Characteristic>Операционная система</Characteristic><Value>Android 11</Value></Row>
+  <Row><SmartphoneId>4</SmartphoneId><Characteristic>Диагональ экрана</Characteristic><Value>6.1 дюйма</Value></Row>
+  <Row><SmartphoneId>5</SmartphoneId><Characteristic>Процессор</Characteristic><Value>Snapdragon 888</Value></Row>
+  <Row><SmartphoneId>1</SmartphoneId><Characteristic>Диагональ экрана</Characteristic><Value>6.1 дюйма</Value></Row>
+  <Row><SmartphoneId>2</SmartphoneId><Characteristic>Процессор</Characteristic><Value>A15 Bionic</Value></Row>
+  <Row><SmartphoneId>3</SmartphoneId><Characteristic>Операционная система</Characteristic><Value>Android 11</Value></Row>
+  <Row><SmartphoneId>4</SmartphoneId><Characteristic>Диагональ экрана</Characteristic><Value>6.1 дюйма</Value></Row>
+  <Row><SmartphoneId>5</SmartphoneId><Characteristic>Процессор</Characteristic><Value>Snapdragon 888</Value></Row>
+  <Row><SmartphoneId>1</SmartphoneId><Characteristic>Диагональ экрана</Characteristic><Value>6.1 дюйма</Value></Row>
+  <Row><SmartphoneId>2</SmartphoneId><Characteristic>Процессор</Characteristic><Value>A15 Bionic</Value></Row>
+  <Row><SmartphoneId>3</SmartphoneId><Characteristic>Операционная система</Characteristic><Value>Android 11</Value></Row>
+  <Row><SmartphoneId>4</SmartphoneId><Characteristic>Диагональ экрана</Characteristic><Value>6.1 дюйма</Value></Row>
+  <Row><SmartphoneId>5</SmartphoneId><Characteristic>Процессор</Characteristic><Value>Snapdragon 888</Value></Row>
+  <Row><SmartphoneId>1</SmartphoneId><Characteristic>Диагональ экрана</Characteristic><Value>6.1 дюйма</Value></Row>
+  <Row><SmartphoneId>2</SmartphoneId><Characteristic>Процессор</Characteristic><Value>A15 Bionic</Value></Row>
+  <Row><SmartphoneId>3</SmartphoneId><Characteristic>Операционная система</Characteristic><Value>Android 11</Value></Row>
+  <Row><SmartphoneId>4</SmartphoneId><Characteristic>Диагональ экрана</Characteristic><Value>6.1 дюйма</Value></Row>
+  <Row><SmartphoneId>5</SmartphoneId><Characteristic>Процессор</Characteristic><Value>Snapdragon 888</Value></Row>
+</SmartphoneCharacteristics>
+<Orders>
+  <Row><UserId>1</UserId><TotalPrice>89999.00</TotalPrice><Status>В обработке</Status><CreatedAt>01.01.2024</CreatedAt><UpdatedAt>02.01.2024</UpdatedAt></Row>
+  <Row><UserId>2</UserId><TotalPrice>109999.00</TotalPrice><Status>Завершен</Status><CreatedAt>01.02.2024</CreatedAt><UpdatedAt>03.02.2024</UpdatedAt></Row>
+  <Row><UserId>3</UserId><TotalPrice>29999.00</TotalPrice><Status>Отменен</Status><CreatedAt>01.03.2024</CreatedAt><UpdatedAt>02.03.2024</UpdatedAt></Row>
+  <Row><UserId>4</UserId><TotalPrice>49999.00</TotalPrice><Status>В процессе</Status><CreatedAt>01.04.2024</CreatedAt><UpdatedAt>03.04.2024</UpdatedAt></Row>
+  <Row><UserId>5</UserId><TotalPrice>74999.00</TotalPrice><Status>Завершен</Status><CreatedAt>01.05.2024</CreatedAt><UpdatedAt>02.05.2024</UpdatedAt></Row>
+  <Row><UserId>1</UserId><TotalPrice>89999.00</TotalPrice><Status>В обработке</Status><CreatedAt>01.01.2024</CreatedAt><UpdatedAt>02.01.2024</UpdatedAt></Row>
+  <Row><UserId>2</UserId><TotalPrice>109999.00</TotalPrice><Status>Завершен</Status><CreatedAt>01.02.2024</CreatedAt><UpdatedAt>03.02.2024</UpdatedAt></Row>
+  <Row><UserId>3</UserId><TotalPrice>29999.00</TotalPrice><Status>Отменен</Status><CreatedAt>01.03.2024</CreatedAt><UpdatedAt>02.03.2024</UpdatedAt></Row>
+  <Row><UserId>4</UserId><TotalPrice>49999.00</TotalPrice><Status>В процессе</Status><CreatedAt>01.04.2024</CreatedAt><UpdatedAt>03.04.2024</UpdatedAt></Row>
+  <Row><UserId>5</UserId><TotalPrice>74999.00</TotalPrice><Status>Завершен</Status><CreatedAt>01.05.2024</CreatedAt><UpdatedAt>02.05.2024</UpdatedAt></Row>
+  <Row><UserId>1</UserId><TotalPrice>89999.00</TotalPrice><Status>В обработке</Status><CreatedAt>01.01.2024</CreatedAt><UpdatedAt>02.01.2024</UpdatedAt></Row>
+  <Row><UserId>2</UserId><TotalPrice>109999.00</TotalPrice><Status>Завершен</Status><CreatedAt>01.02.2024</CreatedAt><UpdatedAt>03.02.2024</UpdatedAt></Row>
+  <Row><UserId>3</UserId><TotalPrice>29999.00</TotalPrice><Status>Отменен</Status><CreatedAt>01.03.2024</CreatedAt><UpdatedAt>02.03.2024</UpdatedAt></Row>
+  <Row><UserId>4</UserId><TotalPrice>49999.00</TotalPrice><Status>В процессе</Status><CreatedAt>01.04.2024</CreatedAt><UpdatedAt>03.04.2024</UpdatedAt></Row>
+  <Row><UserId>5</UserId><TotalPrice>74999.00</TotalPrice><Status>Завершен</Status><CreatedAt>01.05.2024</CreatedAt><UpdatedAt>02.05.2024</UpdatedAt></Row>
+  <Row><UserId>1</UserId><TotalPrice>89999.00</TotalPrice><Status>В обработке</Status><CreatedAt>01.01.2024</CreatedAt><UpdatedAt>02.01.2024</UpdatedAt></Row>
+  <Row><UserId>2</UserId><TotalPrice>109999.00</TotalPrice><Status>Завершен</Status><CreatedAt>01.02.2024</CreatedAt><UpdatedAt>03.02.2024</UpdatedAt></Row>
+  <Row><UserId>3</UserId><TotalPrice>29999.00</TotalPrice><Status>Отменен</Status><CreatedAt>01.03.2024</CreatedAt><UpdatedAt>02.03.2024</UpdatedAt></Row>
+  <Row><UserId>4</UserId><TotalPrice>49999.00</TotalPrice><Status>В процессе</Status><CreatedAt>01.04.2024</CreatedAt><UpdatedAt>03.04.2024</UpdatedAt></Row>
+  <Row><UserId>5</UserId><TotalPrice>74999.00</TotalPrice><Status>Завершен</Status><CreatedAt>01.05.2024</CreatedAt><UpdatedAt>02.05.2024</UpdatedAt></Row>
+</Orders>
+<OrderItems>
+  <Row><OrderId>1</OrderId><SmartphoneId>1</SmartphoneId><Quantity>1</Quantity><Price>89999.00</Price></Row>
+  <Row><OrderId>2</OrderId><SmartphoneId>2</SmartphoneId><Quantity>1</Quantity><Price>109999.00</Price></Row>
+  <Row><OrderId>3</OrderId><SmartphoneId>3</SmartphoneId><Quantity>1</Quantity><Price>29999.00</Price></Row>
+  <Row><OrderId>4</OrderId><SmartphoneId>4</SmartphoneId><Quantity>1</Quantity><Price>49999.00</Price></Row>
+  <Row><OrderId>5</OrderId><SmartphoneId>5</SmartphoneId><Quantity>1</Quantity><Price>74999.00</Price></Row>
+  <Row><OrderId>1</OrderId><SmartphoneId>1</SmartphoneId><Quantity>1</Quantity><Price>89999.00</Price></Row>
+  <Row><OrderId>2</OrderId><SmartphoneId>2</SmartphoneId><Quantity>1</Quantity><Price>109999.00</Price></Row>
+  <Row><OrderId>3</OrderId><SmartphoneId>3</SmartphoneId><Quantity>1</Quantity><Price>29999.00</Price></Row>
+  <Row><OrderId>4</OrderId><SmartphoneId>4</SmartphoneId><Quantity>1</Quantity><Price>49999.00</Price></Row>
+  <Row><OrderId>5</OrderId><SmartphoneId>5</SmartphoneId><Quantity>1</Quantity><Price>74999.00</Price></Row>
+  <Row><OrderId>1</OrderId><SmartphoneId>1</SmartphoneId><Quantity>1</Quantity><Price>89999.00</Price></Row>
+  <Row><OrderId>2</OrderId><SmartphoneId>2</SmartphoneId><Quantity>1</Quantity><Price>109999.00</Price></Row>
+  <Row><OrderId>3</OrderId><SmartphoneId>3</SmartphoneId><Quantity>1</Quantity><Price>29999.00</Price></Row>
+  <Row><OrderId>4</OrderId><SmartphoneId>4</SmartphoneId><Quantity>1</Quantity><Price>49999.00</Price></Row>
+  <Row><OrderId>5</OrderId><SmartphoneId>5</SmartphoneId><Quantity>1</Quantity><Price>74999.00</Price></Row>
+  <Row><OrderId>1</OrderId><SmartphoneId>1</SmartphoneId><Quantity>1</Quantity><Price>89999.00</Price></Row>
+  <Row><OrderId>2</OrderId><SmartphoneId>2</SmartphoneId><Quantity>1</Quantity><Price>109999.00</Price></Row>
+  <Row><OrderId>3</OrderId><SmartphoneId>3</SmartphoneId><Quantity>1</Quantity><Price>29999.00</Price></Row>
+  <Row><OrderId>4</OrderId><SmartphoneId>4</SmartphoneId><Quantity>1</Quantity><Price>49999.00</Price></Row>
+  <Row><OrderId>5</OrderId><SmartphoneId>5</SmartphoneId><Quantity>1</Quantity><Price>74999.00</Price></Row>
+</OrderItems>
+</Tables>
